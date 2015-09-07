@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mewe.mapping.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.mewe.pojo.Answer" >
+    <result column="id" property="id" jdbcType="CHAR" />
+    <result column="basicId" property="basicid" jdbcType="CHAR" />
+    <result column="pointTotal" property="pointtotal" jdbcType="INTEGER" />
+    <result column="answerDetailString" property="answerdetailstring" jdbcType="LONGVARCHAR" />
+    <result column="answerDetailJson" property="answerdetailjson" jdbcType="LONGVARCHAR" />
+    <result column="answerSectionString" property="answersectionstring" jdbcType="LONGVARCHAR" />
+    <result column="intervenedSectionString" property="intervenedsectionstring" jdbcType="LONGVARCHAR" />
+    <result column="finalConclusion" property="finalconclusion" jdbcType="VARCHAR" />
+    <result column="currentSection" property="currentsection" jdbcType="INTEGER" />
+    <result column="createdBy" property="createdby" jdbcType="VARCHAR" />
+    <result column="createdDate" property="createddate" jdbcType="TIMESTAMP" />
+    <result column="modifiedBy" property="modifiedby" jdbcType="VARCHAR" />
+    <result column="modifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, basicId, pointTotal, finalConclusion, currentSection, createdBy, createdDate, 
+    modifiedBy, modifiedDate
+  </sql>
+</mapper>

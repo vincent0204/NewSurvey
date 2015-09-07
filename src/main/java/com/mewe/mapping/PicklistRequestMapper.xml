@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mewe.pojo.mapping.PicklistRequestMapper" >
+  <resultMap id="BaseResultMap" type="com.mewe.pojo.PicklistRequest" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="parentId" property="parentid" jdbcType="CHAR" />
+    <result column="level" property="level" jdbcType="CHAR" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="mainRequest" property="mainrequest" jdbcType="CHAR" />
+    <result column="otherRequest" property="otherrequest" jdbcType="CHAR" />
+    <result column="isMini" property="ismini" jdbcType="CHAR" />
+    <result column="miniId" property="miniid" jdbcType="CHAR" />
+    <result column="isActive" property="isactive" jdbcType="CHAR" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="createdDate" property="createddate" jdbcType="TIMESTAMP" />
+    <result column="modifyBy" property="modifyby" jdbcType="VARCHAR" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, parentId, level, label, sequence, mainRequest, otherRequest, isMini, miniId, 
+    isActive, createBy, createdDate, modifyBy, modifyDate
+  </sql>
+</mapper>

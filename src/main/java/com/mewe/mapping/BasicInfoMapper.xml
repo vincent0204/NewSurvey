@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mewe.dao.IBasicInfoDao" >
+  <resultMap id="BasicInfoResultMap" type="com.mewe.pojo.BasicInfo" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="wechatId" property="wechatid" jdbcType="CHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="height" property="height" jdbcType="CHAR" />
+    <result column="weight" property="weight" jdbcType="CHAR" />
+    <result column="workEnvironment" property="workenvironment" jdbcType="CHAR" />
+    <result column="mainReq" property="mainreq" jdbcType="CHAR" />
+    <result column="mainSubReq" property="mainsubreq" jdbcType="VARCHAR" />
+    <result column="otherReq" property="otherreq" jdbcType="CHAR" />
+    <result column="otherSubReq" property="othersubreq" jdbcType="VARCHAR" />
+    <result column="createdBy" property="createdby" jdbcType="VARCHAR" />
+    <result column="createdDate" property="createddate" jdbcType="TIMESTAMP" />
+    <result column="modifiedBy" property="modifiedby" jdbcType="VARCHAR" />
+    <result column="isActive" property="isactive" jdbcType="CHAR" />
+    <result column="modifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="BasicInfo_Column_List" >
+    id, wechatId, username, phone, sex, age, height, weight, workEnvironment, mainReq, 
+    mainSubReq, otherReq, otherSubReq, createdBy, createdDate, modifiedBy, isActive, 
+    modifiedDate
+  </sql>
+  
+  <!-- Start Eric 2015/09/02 -->
+  <insert id="insert" parameterType="com.mewe.pojo.BasicInfo" >
+    insert into mewe_basic_info (id, wechatId, username, 
+      phone, sex, age, height, 
+      weight, workEnvironment, mainReq, 
+      mainSubReq, otherReq, otherSubReq, 
+      createdBy, createdDate, modifiedBy, 
+      isActive, modifiedDate)
+    values (#{id,jdbcType=CHAR}, #{wechatid,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{height,jdbcType=CHAR}, 
+      #{weight,jdbcType=CHAR}, #{workenvironment,jdbcType=CHAR}, #{mainreq,jdbcType=CHAR}, 
+      #{mainsubreq,jdbcType=VARCHAR}, #{otherreq,jdbcType=CHAR}, #{othersubreq,jdbcType=VARCHAR}, 
+      #{createdby,jdbcType=VARCHAR}, #{createddate,jdbcType=TIMESTAMP}, #{modifiedby,jdbcType=VARCHAR}, 
+      #{isactive,jdbcType=CHAR}, #{modifieddate,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <select id="selectByPrimaryKey" resultMap="BasicInfoResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="BasicInfo_Column_List" />
+    from mewe_basic_info
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <!-- End -->
+  
+</mapper>
