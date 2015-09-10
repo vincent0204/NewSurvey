@@ -3,7 +3,7 @@ package com.mewe.pojo;
 import java.util.Date;
 
 public class BasicInfo {
-    private String id;
+    private Integer id;
 
     private String wechatid;
 
@@ -39,15 +39,17 @@ public class BasicInfo {
 
     private Date modifieddate;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
-    public String getWechatid() {
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getWechatid() {
         return wechatid;
     }
 

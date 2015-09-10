@@ -6,4 +6,5 @@ public interface IBasicInfoService {
 	
 	BasicInfo selectByPrimaryKey(String id);
 	
+	Boolean saveFirstPage(BasicInfo basicInfo);
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mewe.dao.IBasicInfoDao" >
   <resultMap id="BasicInfoResultMap" type="com.mewe.pojo.BasicInfo" >
-    <id column="id" property="id" jdbcType="CHAR" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="wechatId" property="wechatid" jdbcType="CHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="CHAR" />
@@ -30,13 +30,13 @@
   
   <!-- Start Eric 2015/09/02 -->
   <insert id="insert" parameterType="com.mewe.pojo.BasicInfo" >
-    insert into mewe_basic_info (id, wechatId, username, 
+    insert into mewe_basic_info (wechatId, username, 
       phone, sex, age, height, 
       weight, workEnvironment, mainReq, 
       mainSubReq, otherReq, otherSubReq, 
       createdBy, createdDate, modifiedBy, 
       isActive, modifiedDate)
-    values (#{id,jdbcType=CHAR}, #{wechatid,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
+    values (#{wechatid,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
       #{phone,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{height,jdbcType=CHAR}, 
       #{weight,jdbcType=CHAR}, #{workenvironment,jdbcType=CHAR}, #{mainreq,jdbcType=CHAR}, 
       #{mainsubreq,jdbcType=VARCHAR}, #{otherreq,jdbcType=CHAR}, #{othersubreq,jdbcType=VARCHAR}, 
@@ -48,7 +48,7 @@
     select 
     <include refid="BasicInfo_Column_List" />
     from mewe_basic_info
-    where id = #{id,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
   <!-- End -->
   

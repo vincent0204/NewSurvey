@@ -16,5 +16,9 @@ public class BasicInfoServiceImpl implements IBasicInfoService {
 	public BasicInfo selectByPrimaryKey(String id) {
 		return this.basicInfoDao.selectByPrimaryKey(id);
 	}
+	
+	public Boolean saveFirstPage(BasicInfo basicInfo) {
+		return this.basicInfoDao.insert(basicInfo) == 1; 
+	}
 
 }

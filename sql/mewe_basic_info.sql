@@ -19,7 +19,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `mewe_basic_info`;
 CREATE TABLE `mewe_basic_info` (
-  `id` char(10) NOT NULL default '',
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `wechatId` char(32) default NULL,
   `username` varchar(32) default NULL,
   `phone` char(11) default '',
@@ -38,7 +38,7 @@ CREATE TABLE `mewe_basic_info` (
   `isActive` char(1) default '',
   `modifiedDate` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 -- ----------------------------
 -- Records of mewe_basic_info
