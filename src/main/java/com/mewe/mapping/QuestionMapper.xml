@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mewe.pojo.mapping.QuestionMapper" >
+<mapper namespace="com.mewe.dao.IQuestionDao" >
   <resultMap id="BaseResultMap" type="com.mewe.pojo.Question" >
     <result column="id" property="id" jdbcType="CHAR" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
     <result column="sectionId" property="sectionid" jdbcType="INTEGER" />
     <result column="seqInSection" property="seqinsection" jdbcType="INTEGER" />
-    <result column="isActive" property="isactive" jdbcType="TINYINT" />
+    <result column="isActive" property="isactive" jdbcType="VARCHAR" />
     <result column="createdBy" property="createdby" jdbcType="VARCHAR" />
     <result column="createdDate" property="createddate" jdbcType="TIMESTAMP" />
     <result column="modifiedBy" property="modifiedby" jdbcType="VARCHAR" />
     <result column="modifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+    <result column="isMale" property="isMale" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.mewe.pojo.Question" extends="BaseResultMap" >
     <result column="label" property="label" jdbcType="LONGVARCHAR" />
   </resultMap>
   
   <sql id="Base_Column_List" >
-    id, sectionId, seqInSection, isActive, createdBy, createdDate, modifiedBy, modifiedDate
+    id, label, sectionId, seqInSection, isActive, isMale, createdBy, createdDate, modifiedBy, modifiedDate
   </sql>
+  
+   <select id="selectAllQuestions" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from mewe_question order by id
+  </select>
 </mapper>

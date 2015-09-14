@@ -9,7 +9,7 @@ public class Question {
 
     private Integer seqinsection;
 
-    private Byte isactive;
+    private String isactive;
 
     private String createdby;
 
@@ -20,8 +20,18 @@ public class Question {
     private Date modifieddate;
 
     private String label;
+    
+    private String isMale;
 
-    public String getId() {
+    public String getIsMale() {
+		return isMale;
+	}
+
+	public void setIsMale(String isMale) {
+		this.isMale = isMale;
+	}
+
+	public String getId() {
         return id;
     }
 
@@ -45,11 +55,11 @@ public class Question {
         this.seqinsection = seqinsection;
     }
 
-    public Byte getIsactive() {
+    public String getIsactive() {
         return isactive;
     }
 
-    public void setIsactive(Byte isactive) {
+    public void setIsactive(String isactive) {
         this.isactive = isactive;
     }
 
