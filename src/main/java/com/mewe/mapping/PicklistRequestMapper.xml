@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mewe.pojo.mapping.PicklistRequestMapper" >
+<mapper namespace="com.mewe.dao.IPicklistRequestDao" >
   <resultMap id="BaseResultMap" type="com.mewe.pojo.PicklistRequest" >
     <id column="id" property="id" jdbcType="CHAR" />
     <result column="parentId" property="parentid" jdbcType="CHAR" />
@@ -22,4 +22,18 @@
     id, parentId, level, label, sequence, mainRequest, otherRequest, isMini, miniId, 
     isActive, createBy, createdDate, modifyBy, modifyDate
   </sql>
+  
+  <!--Start Eric 2015/09/15 -->
+  <select id="selectAllMainRequests" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from mewe_picklist_request where id between 16 and 21 and level = 1
+  </select>
+  
+  <select id="selectAllOtherRequestsByMainReqId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select 
+    <include refid="Base_Column_List" />
+    from mewe_picklist_request where parentId  = #{mianRequestId}
+  </select>
+  <!-- End -->
 </mapper>

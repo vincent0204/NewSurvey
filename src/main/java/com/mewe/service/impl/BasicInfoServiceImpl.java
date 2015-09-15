@@ -1,5 +1,7 @@
 package com.mewe.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -17,8 +19,12 @@ public class BasicInfoServiceImpl implements IBasicInfoService {
 		return this.basicInfoDao.selectByPrimaryKey(id);
 	}
 	
-	public Boolean saveFirstPage(BasicInfo basicInfo) {
-		return this.basicInfoDao.insert(basicInfo) == 1; 
+	public int saveFirstPage(BasicInfo basicInfo) {
+		return this.basicInfoDao.insert(basicInfo); 
+	}
+
+	public List<String> queryAllWorkEnvironments() {
+		return this.basicInfoDao.selectAllWorkEnvironments();
 	}
 
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mewe.pojo.mapping.WorkEnvironmentMapper" >
-  <resultMap id="BaseResultMap" type="com.mewe.pojo.WorkEnvironment" >
+<mapper namespace="com.mewe.dao.IWorkEnvironmentDao" >
+
+  <resultMap id="WorkEnvironmentResultMap" type="com.mewe.pojo.WorkEnvironment" >
     <id column="id" property="id" jdbcType="CHAR" />
     <result column="label" property="label" jdbcType="VARCHAR" />
     <result column="createBy" property="createby" jdbcType="VARCHAR" />
@@ -10,7 +11,16 @@
     <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
   </resultMap>
   
-  <sql id="Base_Column_List" >
+  <sql id="WorkEnvironment_Column_List" >
     id, label, createBy, cratedDate, modifyBy, modifyDate
   </sql>
+  
+  <!--Start Eric 2015/09/14 -->
+  <select id="selectAllWorkEnvironments" resultMap="WorkEnvironmentResultMap">
+  	select 
+    <include refid="WorkEnvironment_Column_List" />
+    from mewe_work_environment
+  </select>
+  <!-- End -->
+  
 </mapper>

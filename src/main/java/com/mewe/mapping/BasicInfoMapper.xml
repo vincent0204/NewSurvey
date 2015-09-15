@@ -29,7 +29,7 @@
   </sql>
   
   <!-- Start Eric 2015/09/02 -->
-  <insert id="insert" parameterType="com.mewe.pojo.BasicInfo" >
+  <insert id="insert" parameterType="com.mewe.pojo.BasicInfo">
     insert into mewe_basic_info (wechatId, username, 
       phone, sex, age, height, 
       weight, workEnvironment, mainReq, 
@@ -45,11 +45,12 @@
   </insert>
   
   <select id="selectByPrimaryKey" resultMap="BasicInfoResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="BasicInfo_Column_List" />
     from mewe_basic_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <!-- End -->
   
 </mapper>

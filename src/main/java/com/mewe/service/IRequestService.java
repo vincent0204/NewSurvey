@@ -1,12 +1,10 @@
 package com.mewe.service;
 
-import java.util.List;
-
-import com.mewe.pojo.PicklistRequest;
+import java.util.Map;
 
 public interface IRequestService {
 
-	List<PicklistRequest> getMainRequest();
+	Map<String, String> queryAllMainRequestMap();
 	
-	List<PicklistRequest> getMainSubRequest(String mainId);
+	Map<String, String> queryAllOtherRequestMap(String mainRequestId);
 }

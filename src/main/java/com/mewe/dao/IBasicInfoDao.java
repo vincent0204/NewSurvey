@@ -1,10 +1,12 @@
 package com.mewe.dao;
 
+import java.util.List;
+
 import com.mewe.pojo.BasicInfo;
 
 public interface IBasicInfoDao {
 	int insert(BasicInfo record);
-//
+
 //	int insertSelective(BasicInfo record);
 //
 //	int deleteById(String id);
@@ -14,5 +16,7 @@ public interface IBasicInfoDao {
 //	int updateByPrimaryKey(BasicInfo record);
 	
     BasicInfo selectByPrimaryKey(String id);
+    
+    List<String> selectAllWorkEnvironments();
 
 }

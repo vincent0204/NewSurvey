@@ -1,5 +1,10 @@
 package com.mewe.dao;
 
+import java.util.List;
+
+import com.mewe.pojo.PicklistRequest;
+import com.mewe.pojo.WorkEnvironment;
+
 
 public interface IWorkEnvironmentDao {
 //    int deleteByPrimaryKey(String id);
@@ -13,4 +18,9 @@ public interface IWorkEnvironmentDao {
 //    int updateByPrimaryKeySelective(WorkEnvironment record);
 //
 //    int updateByPrimaryKey(WorkEnvironment record);
+	
+	List<WorkEnvironment> selectAllWorkEnvironments();
+	
+	List<PicklistRequest> selectAllMainRequests();
+	
 }
