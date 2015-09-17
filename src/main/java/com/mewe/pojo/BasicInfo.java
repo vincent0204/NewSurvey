@@ -21,13 +21,11 @@ public class BasicInfo {
 
     private String workenvironment;
 
+    private String otherworkenvironment;
+
     private String mainreq;
 
-    private String mainsubreq;
-
     private String otherreq;
-
-    private String othersubreq;
 
     private String createdby;
 
@@ -39,17 +37,15 @@ public class BasicInfo {
 
     private Date modifieddate;
 
-
-
     public Integer getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getWechatid() {
+    public String getWechatid() {
         return wechatid;
     }
 
@@ -113,6 +109,14 @@ public class BasicInfo {
         this.workenvironment = workenvironment == null ? null : workenvironment.trim();
     }
 
+    public String getOtherworkenvironment() {
+        return otherworkenvironment;
+    }
+
+    public void setOtherworkenvironment(String otherworkenvironment) {
+        this.otherworkenvironment = otherworkenvironment == null ? null : otherworkenvironment.trim();
+    }
+
     public String getMainreq() {
         return mainreq;
     }
@@ -121,28 +125,12 @@ public class BasicInfo {
         this.mainreq = mainreq == null ? null : mainreq.trim();
     }
 
-    public String getMainsubreq() {
-        return mainsubreq;
-    }
-
-    public void setMainsubreq(String mainsubreq) {
-        this.mainsubreq = mainsubreq == null ? null : mainsubreq.trim();
-    }
-
     public String getOtherreq() {
         return otherreq;
     }
 
     public void setOtherreq(String otherreq) {
         this.otherreq = otherreq == null ? null : otherreq.trim();
-    }
-
-    public String getOthersubreq() {
-        return othersubreq;
-    }
-
-    public void setOthersubreq(String othersubreq) {
-        this.othersubreq = othersubreq == null ? null : othersubreq.trim();
     }
 
     public String getCreatedby() {

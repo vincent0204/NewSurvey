@@ -1,0 +1,27 @@
+.section{
+	width: 95%;
+	margin: auto;
+}
+.title{
+	width: 95%;
+	height:35px;
+	line-height:35px;
+	vertical-align: middle;
+	margin: auto;
+}
+.section_img{
+	width: 95%;
+}
+.section_div{
+	padding-left: 10px;
+}
+.submit{
+	height:35px; 
+	font-size: 20px;
+}
+#link{
+	text-decoration: none;
+}
+
+
+

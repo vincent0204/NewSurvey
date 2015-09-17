@@ -28,7 +28,6 @@
 	}
 	
 	function searchOtherRequestPlValues() {
-		var html = "";
 		var selected_mainRequestId = document.getElementById("selected_mainRequestId").value;
 		if (selected_mainRequestId == "21") {
 			document.getElementById("otherRequest_div").style.display="none";
@@ -39,14 +38,15 @@
 		document.getElementById("otherRequest2_div").style.display="none";
 		$.ajax({
 			type: "POST",  
-				url : "accMianReqIdtoSearchOtherReq", 
+				url : "ajaxAccordingToMianReqIdtoSearchOtherReq", 
 				dataType:'json',
 				data: 'selected_mainRequestId='+selected_mainRequestId,
 				success: function(data){
+					var html = "";
 					$.each(data, function(i, item) {
 						 html += "<option value='" + i + "'>" + item + "</option>";
-						 $(html).appendTo("#selected_otherRequestIds");
 			        });
+					$(html).appendTo("#selected_otherRequestIds");
 				}
 		});
 	}
@@ -54,7 +54,11 @@
 
 <body>
 <center>
-	<form:form action="" modelAttribute="contentModel" method="post">
+	<form:form action="saveSecondBasicInfoRecord" modelAttribute="contentModel" method="post">
+		<div style="display:none;">
+			<form:input path="recordId"/>
+		</div>
+	
 		<div>
 			<font>工作环境:</font>
 			<form:select id="workEnvironmentId" path="selected_workEnvironmentId" onchange="isShowOtherWE()">  
@@ -68,7 +72,7 @@
 		
 		<div id="otherWorkEnvironment_div" style="display:none;">
 			<font>其他工作环境:</font>
-			<input id="otherRequest" name="otherRequest" type="text" />
+			<input id="otherWorkEnvironment" name="otherWorkEnvironment" type="text" />
 		</div>
 		
 		<br/>
@@ -97,7 +101,11 @@
 		
 		<div id="otherRequest2_div" style="display:none;">
 			<font>其他诉求:</font>
-			<input id="otherRequest2" name="otherRequest2" type="text" />
+			<form:input id="otherRequest" path="otherRequest"/>
+		</div>
+		
+		<div>
+			<input type="submit" value="提交" />
 		</div>
 	</form:form>
 </center>

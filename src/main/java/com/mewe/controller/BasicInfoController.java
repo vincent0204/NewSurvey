@@ -1,6 +1,5 @@
 package com.mewe.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -8,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mewe.model.WorkEnvironmentModel;
@@ -40,43 +41,30 @@ public class BasicInfoController {
     
     @RequestMapping(value = "/saveFirstBasicInfoRecord", method = RequestMethod.POST)
     public String saveFirstBasicInfoRecord(HttpServletRequest request,Model model) {
-    	int recordId = saveFirstBasicInfo(request);
-    	System.out.println("recordId--->"+recordId);
+    	
     	WorkEnvironmentModel workEnvironmentModel = new WorkEnvironmentModel();
+    	workEnvironmentModel.setRecordId(this.ibasicInfoService.saveFirstPage(request));
         workEnvironmentModel.setWorkEnvironmentMap(this.iworkEnvironmentService.queryAllWorkEnvironmentsByMap());
         workEnvironmentModel.setMainRequestMap(this.irequestService.queryAllMainRequestMap());
+        
         model.addAttribute("contentModel", workEnvironmentModel);
     	return "basicInfo2";
     }
     
-//    Test--------------------------
-    @RequestMapping(value = "/saveSecondBasicInfoRecord", method = RequestMethod.GET)
-	public String saveSecondBasicInfoRecord(HttpServletRequest request,Model model) {
-    	WorkEnvironmentModel workEnvironmentModel = new WorkEnvironmentModel();
-        workEnvironmentModel.setWorkEnvironmentMap(this.iworkEnvironmentService.queryAllWorkEnvironmentsByMap());
-        workEnvironmentModel.setMainRequestMap(this.irequestService.queryAllMainRequestMap());
-        model.addAttribute("contentModel", workEnvironmentModel);
-	    	
-	    return "basicInfo2";
+    @RequestMapping(value = "/saveSecondBasicInfoRecord", method = RequestMethod.POST)
+	public String saveSecondBasicInfoRecord(HttpServletRequest request,Model model, 
+			@ModelAttribute("contentModel") WorkEnvironmentModel workEnvironmentModel) {
+    	
+    	this.ibasicInfoService.saveSecondPage(workEnvironmentModel);
+    	
+    	return "test";
 	}
     
-    @RequestMapping(value = "/accMianReqIdtoSearchOtherReq", method = RequestMethod.POST)
+    @RequestMapping(value = "/ajaxAccordingToMianReqIdtoSearchOtherReq", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> accMianReqIdtoSearchOtherReq(HttpServletRequest request,Model model) {
-    	return this.irequestService.queryAllOtherRequestMap(request.getParameter("selected_mainRequestId"));
-    }
-    
-    private int saveFirstBasicInfo(HttpServletRequest request) {
-
-    	BasicInfo basicInfo = new BasicInfo();
-    	basicInfo.setUsername(request.getParameter("userName"));  
-    	basicInfo.setPhone(request.getParameter("phone"));  
-        basicInfo.setSex(request.getParameterValues("sex")[0]);
-        basicInfo.setAge(Integer.valueOf(request.getParameter("age")));
-        basicInfo.setPhone(request.getParameter("height"));  
-        basicInfo.setWeight(request.getParameter("weight")); 
-        
-    	return this.ibasicInfoService.saveFirstPage(basicInfo);
+    public Map<String, String> ajaxAccordingToMianReqIdtoSearchOtherReq(HttpServletRequest request,Model model, 
+    		@RequestParam("selected_mainRequestId") String selected_mainRequestId) {
+    	return this.irequestService.queryAllOtherRequestMap(selected_mainRequestId);
     }
     
 }

@@ -2,47 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mewe.dao.IBasicInfoDao" >
   <resultMap id="BasicInfoResultMap" type="com.mewe.pojo.BasicInfo" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="wechatId" property="wechatid" jdbcType="CHAR" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="CHAR" />
-    <result column="sex" property="sex" jdbcType="CHAR" />
-    <result column="age" property="age" jdbcType="INTEGER" />
-    <result column="height" property="height" jdbcType="CHAR" />
-    <result column="weight" property="weight" jdbcType="CHAR" />
-    <result column="workEnvironment" property="workenvironment" jdbcType="CHAR" />
-    <result column="mainReq" property="mainreq" jdbcType="CHAR" />
-    <result column="mainSubReq" property="mainsubreq" jdbcType="VARCHAR" />
-    <result column="otherReq" property="otherreq" jdbcType="CHAR" />
-    <result column="otherSubReq" property="othersubreq" jdbcType="VARCHAR" />
-    <result column="createdBy" property="createdby" jdbcType="VARCHAR" />
-    <result column="createdDate" property="createddate" jdbcType="TIMESTAMP" />
-    <result column="modifiedBy" property="modifiedby" jdbcType="VARCHAR" />
-    <result column="isActive" property="isactive" jdbcType="CHAR" />
-    <result column="modifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="wechatId" jdbcType="CHAR" property="wechatid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="height" jdbcType="CHAR" property="height" />
+    <result column="weight" jdbcType="CHAR" property="weight" />
+    <result column="workEnvironment" jdbcType="CHAR" property="workenvironment" />
+    <result column="otherWorkEnvironment" jdbcType="CHAR" property="otherworkenvironment" />
+    <result column="mainReq" jdbcType="CHAR" property="mainreq" />
+    <result column="otherReq" jdbcType="VARCHAR" property="otherreq" />
+    <result column="createdBy" jdbcType="VARCHAR" property="createdby" />
+    <result column="createdDate" jdbcType="TIMESTAMP" property="createddate" />
+    <result column="modifiedBy" jdbcType="VARCHAR" property="modifiedby" />
+    <result column="isActive" jdbcType="CHAR" property="isactive" />
+    <result column="modifiedDate" jdbcType="TIMESTAMP" property="modifieddate" />
   </resultMap>
   
   <sql id="BasicInfo_Column_List" >
-    id, wechatId, username, phone, sex, age, height, weight, workEnvironment, mainReq, 
-    mainSubReq, otherReq, otherSubReq, createdBy, createdDate, modifiedBy, isActive, 
-    modifiedDate
+    id, wechatId, username, phone, sex, age, height, weight, workEnvironment, otherWorkEnvironment, 
+    mainReq, otherReq, createdBy, createdDate, modifiedBy, isActive, modifiedDate
   </sql>
   
   <!-- Start Eric 2015/09/02 -->
   <insert id="insert" parameterType="com.mewe.pojo.BasicInfo">
     insert into mewe_basic_info (wechatId, username, 
       phone, sex, age, height, 
-      weight, workEnvironment, mainReq, 
-      mainSubReq, otherReq, otherSubReq, 
-      createdBy, createdDate, modifiedBy, 
-      isActive, modifiedDate)
+      weight, workEnvironment, otherWorkEnvironment, 
+      mainReq, otherReq, createdBy, 
+      createdDate, modifiedBy, isActive, 
+      modifiedDate)
     values (#{wechatid,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
       #{phone,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{height,jdbcType=CHAR}, 
-      #{weight,jdbcType=CHAR}, #{workenvironment,jdbcType=CHAR}, #{mainreq,jdbcType=CHAR}, 
-      #{mainsubreq,jdbcType=VARCHAR}, #{otherreq,jdbcType=CHAR}, #{othersubreq,jdbcType=VARCHAR}, 
-      #{createdby,jdbcType=VARCHAR}, #{createddate,jdbcType=TIMESTAMP}, #{modifiedby,jdbcType=VARCHAR}, 
-      #{isactive,jdbcType=CHAR}, #{modifieddate,jdbcType=TIMESTAMP})
+      #{weight,jdbcType=CHAR}, #{workenvironment,jdbcType=CHAR}, #{otherworkenvironment,jdbcType=CHAR}, 
+      #{mainreq,jdbcType=CHAR}, #{otherreq,jdbcType=VARCHAR}, #{createdby,jdbcType=VARCHAR}, 
+      #{createddate,jdbcType=TIMESTAMP}, #{modifiedby,jdbcType=VARCHAR}, #{isactive,jdbcType=CHAR}, 
+      #{modifieddate,jdbcType=TIMESTAMP})
   </insert>
+  
+  <select id="selectInsertedRecordId" resultType="int">
+  	 select LAST_INSERT_ID() from mewe_basic_info limit 1;
+  </select>
   
   <select id="selectByPrimaryKey" resultMap="BasicInfoResultMap" parameterType="java.lang.String" >
     select
@@ -50,6 +52,19 @@
     from mewe_basic_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <update id="updateBasicInfoById" parameterType="com.mewe.pojo.BasicInfo">
+    update mewe_basic_info
+    set 
+      workEnvironment = #{workenvironment,jdbcType=CHAR},
+      otherWorkEnvironment = #{otherworkenvironment,jdbcType=CHAR},
+      mainReq = #{mainreq,jdbcType=CHAR},
+      otherReq = #{otherreq,jdbcType=VARCHAR},
+      createdBy = #{createdby,jdbcType=VARCHAR},
+      createdDate = #{createddate,jdbcType=TIMESTAMP},
+      isActive = #{isactive,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>	
 
   <!-- End -->
   

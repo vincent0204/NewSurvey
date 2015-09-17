@@ -6,6 +6,8 @@ import com.mewe.pojo.BasicInfo;
 
 public interface IBasicInfoDao {
 	int insert(BasicInfo record);
+	
+	int selectInsertedRecordId();
 
 //	int insertSelective(BasicInfo record);
 //
@@ -18,5 +20,7 @@ public interface IBasicInfoDao {
     BasicInfo selectByPrimaryKey(String id);
     
     List<String> selectAllWorkEnvironments();
+    
+    int updateBasicInfoById(BasicInfo record);
 
 }
