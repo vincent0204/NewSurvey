@@ -1,7 +1,6 @@
 package com.mewe.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,7 @@ public class BasicInfoServiceImpl implements IBasicInfoService {
 	public int saveFirstPage(HttpServletRequest request) {
 		BasicInfo basicInfo = new BasicInfo();
     	basicInfo.setUsername(request.getParameter("userName"));
-    	basicInfo.setPhone(request.getParameter("phone"));  
+    	basicInfo.setPhone(request.getParameter("phone"));
         basicInfo.setSex(request.getParameterValues("sex")[0]);
         basicInfo.setAge(Integer.valueOf(request.getParameter("age")));
         basicInfo.setPhone(request.getParameter("height"));  
@@ -36,10 +35,6 @@ public class BasicInfoServiceImpl implements IBasicInfoService {
 		System.out.println("SaveFirstPage insert successfully! Record Id = > " + recordId);
 		
 		return recordId;
-	}
-
-	public List<String> queryAllWorkEnvironments() {
-		return this.basicInfoDao.selectAllWorkEnvironments();
 	}
 
 	public int saveSecondPage(WorkEnvironmentModel workEnvironmentModel) {

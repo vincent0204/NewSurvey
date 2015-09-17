@@ -19,8 +19,6 @@ public interface IBasicInfoDao {
 	
     BasicInfo selectByPrimaryKey(String id);
     
-    List<String> selectAllWorkEnvironments();
-    
     int updateBasicInfoById(BasicInfo record);
 
 }
