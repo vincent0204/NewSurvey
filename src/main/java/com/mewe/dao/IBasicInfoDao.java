@@ -1,7 +1,5 @@
 package com.mewe.dao;
 
-import java.util.List;
-
 import com.mewe.pojo.BasicInfo;
 
 public interface IBasicInfoDao {

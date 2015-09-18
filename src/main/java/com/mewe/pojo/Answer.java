@@ -3,134 +3,133 @@ package com.mewe.pojo;
 import java.util.Date;
 
 public class Answer {
-    private String id;
+	private int id;
 
-    private String basicid;
+	private int basicid;
 
-    private Integer pointtotal;
+	private Integer pointtotal;
 
-    private String finalconclusion;
+	private String finalconclusion;
 
-    private Integer currentsection;
+	private String currentsection;
 
-    private String createdby;
+	private String createdby;
 
-    private Date createddate;
+	private Date createddate;
 
-    private String modifiedby;
+	private String modifiedby;
 
-    private Date modifieddate;
+	private Date modifieddate;
 
-    private String answerdetailstring;
+	private String answerdetailstring;
 
-    private String answerdetailjson;
+	private String answerdetailjson;
 
-    private String answersectionstring;
+	private String answersectionstring;
 
-    private String intervenedsectionstring;
-    
-    public String getAnswerdetailstring() {
-        return answerdetailstring;
-    }
+	private String conclusionsectionstring;
 
-    public void setAnswerdetailstring(String answerdetailstring) {
-        this.answerdetailstring = answerdetailstring == null ? null : answerdetailstring.trim();
-    }
+	public String getAnswerdetailstring() {
+		return answerdetailstring;
+	}
 
-    public String getAnswerdetailjson() {
-        return answerdetailjson;
-    }
+	public void setAnswerdetailstring(String answerdetailstring) {
+		this.answerdetailstring = answerdetailstring == null ? null : answerdetailstring.trim();
+	}
 
-    public void setAnswerdetailjson(String answerdetailjson) {
-        this.answerdetailjson = answerdetailjson == null ? null : answerdetailjson.trim();
-    }
+	public String getAnswerdetailjson() {
+		return answerdetailjson;
+	}
 
-    public String getAnswersectionstring() {
-        return answersectionstring;
-    }
+	public void setAnswerdetailjson(String answerdetailjson) {
+		this.answerdetailjson = answerdetailjson == null ? null : answerdetailjson.trim();
+	}
 
-    public void setAnswersectionstring(String answersectionstring) {
-        this.answersectionstring = answersectionstring == null ? null : answersectionstring.trim();
-    }
+	public String getAnswersectionstring() {
+		return answersectionstring;
+	}
 
-    public String getIntervenedsectionstring() {
-        return intervenedsectionstring;
-    }
+	public void setAnswersectionstring(String answersectionstring) {
+		this.answersectionstring = answersectionstring == null ? null : answersectionstring.trim();
+	}
 
-    public void setIntervenedsectionstring(String intervenedsectionstring) {
-        this.intervenedsectionstring = intervenedsectionstring == null ? null : intervenedsectionstring.trim();
-    }
-    
+	public String getConclusionsectionstring() {
+		return conclusionsectionstring;
+	}
 
-    public String getId() {
+	public void setConclusionsectionstring(String conclusionsectionstring) {
+		this.conclusionsectionstring = conclusionsectionstring;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getBasicid() {
-        return basicid;
-    }
+	public int getBasicid() {
+		return basicid;
+	}
 
-    public void setBasicid(String basicid) {
-        this.basicid = basicid == null ? null : basicid.trim();
-    }
+	public void setBasicid(int basicid) {
+		this.basicid = basicid;
+	}
 
-    public Integer getPointtotal() {
-        return pointtotal;
-    }
+	public Integer getPointtotal() {
+		return pointtotal;
+	}
 
-    public void setPointtotal(Integer pointtotal) {
-        this.pointtotal = pointtotal;
-    }
+	public void setPointtotal(Integer pointtotal) {
+		this.pointtotal = pointtotal;
+	}
 
-    public String getFinalconclusion() {
-        return finalconclusion;
-    }
+	public String getFinalconclusion() {
+		return finalconclusion;
+	}
 
-    public void setFinalconclusion(String finalconclusion) {
-        this.finalconclusion = finalconclusion == null ? null : finalconclusion.trim();
-    }
+	public void setFinalconclusion(String finalconclusion) {
+		this.finalconclusion = finalconclusion == null ? null : finalconclusion.trim();
+	}
 
-    public Integer getCurrentsection() {
-        return currentsection;
-    }
+	public String getCurrentsection() {
+		return currentsection;
+	}
 
-    public void setCurrentsection(Integer currentsection) {
-        this.currentsection = currentsection;
-    }
+	public void setCurrentsection(String currentsection) {
+		this.currentsection = currentsection;
+	}
 
-    public String getCreatedby() {
-        return createdby;
-    }
+	public String getCreatedby() {
+		return createdby;
+	}
 
-    public void setCreatedby(String createdby) {
-        this.createdby = createdby == null ? null : createdby.trim();
-    }
+	public void setCreatedby(String createdby) {
+		this.createdby = createdby == null ? null : createdby.trim();
+	}
 
-    public Date getCreateddate() {
-        return createddate;
-    }
+	public Date getCreateddate() {
+		return createddate;
+	}
 
-    public void setCreateddate(Date createddate) {
-        this.createddate = createddate;
-    }
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
 
-    public String getModifiedby() {
-        return modifiedby;
-    }
+	public String getModifiedby() {
+		return modifiedby;
+	}
 
-    public void setModifiedby(String modifiedby) {
-        this.modifiedby = modifiedby == null ? null : modifiedby.trim();
-    }
+	public void setModifiedby(String modifiedby) {
+		this.modifiedby = modifiedby == null ? null : modifiedby.trim();
+	}
 
-    public Date getModifieddate() {
-        return modifieddate;
-    }
+	public Date getModifieddate() {
+		return modifieddate;
+	}
 
-    public void setModifieddate(Date modifieddate) {
-        this.modifieddate = modifieddate;
-    }
+	public void setModifieddate(Date modifieddate) {
+		this.modifieddate = modifieddate;
+	}
 }

@@ -1,12 +1,12 @@
 package com.mewe.dao;
 
+import com.mewe.pojo.Answer;
 
 public interface IAnswerDao {
-//    int insert(IAnswerDao record);
-//
-//    int insertSelective(IAnswerDao record);
-//
-//    List<IAnswerDao> selectByExampleWithBLOBs(IAnswerDao example);
-//
-//    List<Answer> selectByExample(IAnswerDao example);
+
+	int add(Answer ans);
+	
+	int update(Answer ans);
+
+	Answer search(int basicId);
 }

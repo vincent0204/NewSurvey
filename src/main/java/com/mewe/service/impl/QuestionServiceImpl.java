@@ -9,14 +9,18 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.mewe.dao.IBasicInfoDao;
 import com.mewe.dao.IQuestionDao;
 import com.mewe.pojo.Question;
 import com.mewe.service.IQuestionService;
 
+@SuppressWarnings("restriction")
 @Service("questionService")
 public class QuestionServiceImpl implements IQuestionService {
 	@Resource
 	private IQuestionDao dao;
+	@Resource
+	private IBasicInfoDao basicInfoDao;
 	
 	private static Map<Integer, List<Question>> sectionMap;
 	
@@ -47,7 +51,8 @@ public class QuestionServiceImpl implements IQuestionService {
 		return sectionMap.get(sectionId);
 	}
 
-	public List<Question> getQuestionsInSection(Integer sectionId, String isMale) {
+	public List<Question> getQuestionsInSection(Integer sectionId, String basicInfoId) {
+		String isMale = basicInfoDao.selectByPrimaryKey(basicInfoId).getSex();
 		List<Question> questionsInSection = getQuestionsInSection(sectionId);
 		List<Question> questions = new ArrayList<Question>();
 		

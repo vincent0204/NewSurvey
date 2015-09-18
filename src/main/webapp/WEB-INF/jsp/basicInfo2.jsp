@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="/css/bootstrap.css" type="text/css"></link>
+<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"></link>
+<link rel="stylesheet" href="/css/layout.css" type="text/css"></link>
 <title>Test Title</title>
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
@@ -55,11 +58,12 @@
 <body>
 <center>
 	<form:form action="saveSecondBasicInfoRecord" modelAttribute="contentModel" method="post">
+	  <div class="row section_div">
 		<div style="display:none;">
 			<form:input path="recordId"/>
 		</div>
 	
-		<div>
+		<div class="col-sm-4">
 			<font>工作环境:</font>
 			<form:select id="workEnvironmentId" path="selected_workEnvironmentId" onchange="isShowOtherWE()">  
            		<option value=""/>--请选择--
@@ -68,45 +72,44 @@
 		</div>
 		
 		<br/>
-		<br/>
 		
-		<div id="otherWorkEnvironment_div" style="display:none;">
+		<div id="otherWorkEnvironment_div" style="display:none;" class="col-sm-4">
 			<font>其他工作环境:</font>
-			<input id="otherWorkEnvironment" name="otherWorkEnvironment" type="text" />
+			<input style="margin-right: 2%;" id="otherWorkEnvironment" name="otherWorkEnvironment" type="text" />
 		</div>
 		
 		<br/>
-		<br/>
 		
-		<div>
+		<div class="col-sm-4">
 			<font>主要诉求:</font>
-			<form:select id="selected_mainRequestId" path="selected_mainRequestId" onchange="searchOtherRequestPlValues()">  
+			<form:select style="margin-right: 10%;" id="selected_mainRequestId" path="selected_mainRequestId" onchange="searchOtherRequestPlValues()">  
            		<option value=""/>--请选择--
            		<form:options id="" items="${contentModel.mainRequestMap}"/>  
        		</form:select>
 		</div>
 		
 		<br/>
-		<br/>
 		
-		<div id="otherRequest_div" style="display: none;">
+		<div id="otherRequest_div" style="display: none;" class="col-sm-4">
 			<font>其他诉求:</font>
-			<form:select id="selected_otherRequestIds" path="selected_otherRequestIds">  
+			<form:select style="margin-right: 12%;" id="selected_otherRequestIds" path="selected_otherRequestIds">  
            		<option value=""/>--请选择--
        		</form:select> 
 		</div>
 		
 		<br/>
-		<br/>
 		
-		<div id="otherRequest2_div" style="display:none;">
+		<div style="margin-left: 3%;display: none;" id="otherRequest2_div" class="col-sm-4">
 			<font>其他诉求:</font>
 			<form:input id="otherRequest" path="otherRequest"/>
 		</div>
 		
-		<div>
-			<input type="submit" value="提交" />
-		</div>
+		<br/>
+		
+		<div class= "section">
+            <input type="submit" class = "btn-success submit" style="width: 100%;"  value="保存并下一步"/>
+        </div>
+	  </div>
 	</form:form>
 </center>
 </body>
