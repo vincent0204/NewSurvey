@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mewe.model.AnswerModel;
+import com.mewe.model.QuestionModel;
 import com.mewe.service.IAnswerService;
 
 @SuppressWarnings("restriction")
@@ -26,9 +26,9 @@ public class TestAnswerService {
 	
 	@Test
 	public void testAdd(){
-		AnswerModel ansModel = new AnswerModel();
+		QuestionModel ansModel = new QuestionModel();
 		ansModel.setBasicId(49);
-		ansModel.setSectionId("01");
+//		ansModel.setSectionId("01");
 		
 		service.addAnswer(ansModel);
 	}

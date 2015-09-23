@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<% String path = request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+String path = request.getContextPath(); 
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="/css/bootstrap.css" type="text/css"></link>
-<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"></link>
-<link rel="stylesheet" href="/css/layout.css" type="text/css"></link>
-<title>Test Title</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="<%=basePath %>css/bootstrap.css" type="text/css"></link>
+<link rel="stylesheet" href="<%=basePath %>css/bootstrap.min.css" type="text/css"></link>
+<link rel="stylesheet" href="<%=basePath %>css/layout.css" type="text/css"></link>
+<title>基础信息</title>
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <style type="text/css">
@@ -70,19 +74,19 @@
            		<form:options items="${contentModel.workEnvironmentMap}"/>  
        		</form:select>
 		</div>
-		
+
 		<br/>
 		
 		<div id="otherWorkEnvironment_div" style="display:none;" class="col-sm-4">
 			<font>其他工作环境:</font>
-			<input style="margin-right: 2%;" id="otherWorkEnvironment" name="otherWorkEnvironment" type="text" />
+			<input style="margin-right: 6%;" id="otherWorkEnvironment" name="otherWorkEnvironment" type="text" />
 		</div>
 		
 		<br/>
 		
 		<div class="col-sm-4">
 			<font>主要诉求:</font>
-			<form:select style="margin-right: 10%;" id="selected_mainRequestId" path="selected_mainRequestId" onchange="searchOtherRequestPlValues()">  
+			<form:select style="margin-right: 0%;" id="selected_mainRequestId" path="selected_mainRequestId" onchange="searchOtherRequestPlValues()">  
            		<option value=""/>--请选择--
            		<form:options id="" items="${contentModel.mainRequestMap}"/>  
        		</form:select>
@@ -92,7 +96,7 @@
 		
 		<div id="otherRequest_div" style="display: none;" class="col-sm-4">
 			<font>其他诉求:</font>
-			<form:select style="margin-right: 12%;" id="selected_otherRequestIds" path="selected_otherRequestIds">  
+			<form:select style="margin-right: 0%;" id="selected_otherRequestIds" path="selected_otherRequestIds">  
            		<option value=""/>--请选择--
        		</form:select> 
 		</div>
@@ -101,7 +105,7 @@
 		
 		<div style="margin-left: 3%;display: none;" id="otherRequest2_div" class="col-sm-4">
 			<font>其他诉求:</font>
-			<form:input id="otherRequest" path="otherRequest"/>
+			<form:input style="margin-right: 6%;" id="otherRequest" path="otherRequest"/>
 		</div>
 		
 		<br/>

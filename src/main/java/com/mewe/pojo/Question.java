@@ -6,7 +6,9 @@ public class Question {
     private String id;
 
     private Integer sectionid;
-
+    
+    private String sectionLabel;
+    
     private Integer seqinsection;
 
     private String isactive;
@@ -23,7 +25,15 @@ public class Question {
     
     private String isMale;
 
-    public String getIsMale() {
+    public String getSectionLabel() {
+		return sectionLabel;
+	}
+
+	public void setSectionLabel(String sectionLabel) {
+		this.sectionLabel = sectionLabel;
+	}
+
+	public String getIsMale() {
 		return isMale;
 	}
 

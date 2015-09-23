@@ -13,5 +13,5 @@ import com.mewe.pojo.Question;
  */
 public interface IQuestionService {
 	
-	List<Question> getQuestionsInSection(Integer sectionId, String isMale);
+	List<Question> getQuestionsInSection(Integer sectionId, String basicInfoId);
 }

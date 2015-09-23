@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.mewe.dao.IAnswerDao;
-import com.mewe.model.AnswerModel;
+import com.mewe.model.QuestionModel;
 import com.mewe.pojo.Answer;
 import com.mewe.service.IAnswerService;
 
@@ -26,15 +26,15 @@ public class AnswerServiceImpl implements IAnswerService {
 		return dao.search(basicId);
 	}
 
-	public boolean addAnswer(AnswerModel ansModel) {
-		Map<String, String> answerMap = ansModel.getAnswerMap();
+	public boolean addAnswer(QuestionModel ansModel) {
+//		Map<String, String> answerMap = ansModel.getAnswerMap();
 		int basicId = ansModel.getBasicId();
-		String sectionId = ansModel.getSectionId();
+//		String sectionId = ansModel.getSectionId();
 		
 		Answer ans = new Answer();
 		
 		ans.setBasicid(basicId);
-		ans.setCurrentsection(sectionId);
+//		ans.setCurrentsection(sectionId);
 		ans.setAnswerdetailstring("");
 		ans.setAnswersectionstring("");
 		ans.setPointtotal(0);
@@ -45,26 +45,26 @@ public class AnswerServiceImpl implements IAnswerService {
 		ans.setModifiedby("admin");
 		ans.setModifieddate(new Date());
 		
-		computeAnswer(ans, sectionId, answerMap);
+//		computeAnswer(ans, sectionId, answerMap);
 		
 		return dao.add(ans) == 1;
 	}
 
-	public boolean updateAnswer(AnswerModel ansModel) {
-		Map<String, String> answerMap = ansModel.getAnswerMap();
+	public boolean updateAnswer(QuestionModel ansModel) {
+//		Map<String, String> answerMap = ansModel.getAnswerMap();
 		int basicId = ansModel.getBasicId();
-		String sectionId = ansModel.getSectionId();
+//		String sectionId = ansModel.getSectionId();
 		
 		Answer ans = this.retrieveAnswer(basicId);
 		if (ans == null) {
 			return false;
 		}
 		
-		ans.setCurrentsection(sectionId);
+//		ans.setCurrentsection(sectionId);
 		ans.setModifiedby("admin");
 		ans.setModifieddate(new Date());
 		
-		computeAnswer(ans, sectionId, answerMap);
+//		computeAnswer(ans, sectionId, answerMap);
 		
 		return dao.update(ans) == 1;
 	}
@@ -125,6 +125,6 @@ public class AnswerServiceImpl implements IAnswerService {
 		List<String> conList = new ArrayList<String>(conMap.keySet());
 		Collections.sort(conList);
 		conList = conList.subList(0, Math.min(conList.size(), 3));
-//		ans.setFinalconclusion(String.join("-", conList));
+		ans.setFinalconclusion(String.join("-", conList));
 	} 
 }

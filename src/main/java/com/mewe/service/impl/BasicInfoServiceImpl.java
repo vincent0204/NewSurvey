@@ -27,7 +27,7 @@ public class BasicInfoServiceImpl implements IBasicInfoService {
     	basicInfo.setPhone(request.getParameter("phone"));
         basicInfo.setSex(request.getParameterValues("sex")[0]);
         basicInfo.setAge(Integer.valueOf(request.getParameter("age")));
-        basicInfo.setPhone(request.getParameter("height"));  
+        basicInfo.setHeight(request.getParameter("height"));  
         basicInfo.setWeight(request.getParameter("weight")); 
         
 		this.basicInfoDao.insert(basicInfo);

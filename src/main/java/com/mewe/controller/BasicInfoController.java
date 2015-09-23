@@ -1,9 +1,12 @@
 package com.mewe.controller;
 
+import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mewe.model.WorkEnvironmentModel;
-import com.mewe.pojo.BasicInfo;
 import com.mewe.service.IBasicInfoService;
 import com.mewe.service.IRequestService;
 import com.mewe.service.IWorkEnvironmentService;
+import com.mysql.fabric.Response;
 
 @Controller  
-@RequestMapping("/basicInfo")  
+@RequestMapping("/basicInfoController")  
 public class BasicInfoController {
 	/**
 	 * @author Eric
@@ -52,12 +55,12 @@ public class BasicInfoController {
     }
     
     @RequestMapping(value = "/saveSecondBasicInfoRecord", method = RequestMethod.POST)
-	public String saveSecondBasicInfoRecord(HttpServletRequest request,Model model, 
-			@ModelAttribute("contentModel") WorkEnvironmentModel workEnvironmentModel) {
+	public String saveSecondBasicInfoRecord(HttpServletRequest request, HttpServletResponse response, Model model, 
+			@ModelAttribute("contentModel") WorkEnvironmentModel workEnvironmentModel) throws IOException {
     	
     	this.ibasicInfoService.saveSecondPage(workEnvironmentModel);
-    	
-    	return "test";
+    	return "redirect:/interventionEvaluationController/toInterventionEvaluationPage?basicInfoId="+
+    				workEnvironmentModel.getRecordId();
 	}
     
     @RequestMapping(value = "/ajaxAccordingToMianReqIdtoSearchOtherReq", method = RequestMethod.POST)

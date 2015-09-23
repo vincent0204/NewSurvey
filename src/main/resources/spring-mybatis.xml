@@ -35,11 +35,11 @@
         <property name="maxWait" value="${maxWait}"></property>  
     </bean>  
   	
-  	<!-- static resource -->
+  	<!-- static resource 
   	<mvc:resources location="/css/bootstrap.css" mapping="src/main/webapp/WEB-INF/css/bootstrap.css"/>
   	<mvc:resources location="/css/bootstrap.min.css" mapping="src/main/webapp/WEB-INF/css/bootstrap.min.css"/>
   	<mvc:resources location="/css/layout.css" mapping="src/main/webapp/WEB-INF/css/layout.css"/>
-  	
+  	-->
   	<mvc:annotation-driven />
   	
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->  
@@ -59,6 +59,6 @@
     <bean id="transactionManager"  
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
         <property name="dataSource" ref="dataSource" />  
-    </bean>  
+    </bean>
   
 </beans> 

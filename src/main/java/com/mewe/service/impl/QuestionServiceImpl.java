@@ -29,6 +29,8 @@ public class QuestionServiceImpl implements IQuestionService {
 
 		List<Question> questions = dao.selectAllQuestions();
 		
+		System.out.println("questions ===>" +questions.size());
+		
 		for (Question question : questions) {
 			int sectionId = question.getSectionid();
 			if (sectionMap.get(sectionId) == null) {
@@ -37,6 +39,8 @@ public class QuestionServiceImpl implements IQuestionService {
 			
 			List<Question> questionsInSection = sectionMap.get(sectionId);
 			questionsInSection.add(question);
+			
+//			sectionMap.put(sectionId, questionsInSection);
 		}
 		System.out.println("loadQuestions in section finish!");
 	}

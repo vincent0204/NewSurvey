@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mewe.pojo.Question" >
     <result column="id" property="id" jdbcType="CHAR" />
     <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="sectionLabel" property="sectionLabel" jdbcType="VARCHAR" />
     <result column="sectionId" property="sectionid" jdbcType="INTEGER" />
     <result column="seqInSection" property="seqinsection" jdbcType="INTEGER" />
     <result column="isActive" property="isactive" jdbcType="VARCHAR" />
@@ -18,7 +19,7 @@
   </resultMap>
   
   <sql id="Base_Column_List" >
-    id, label, sectionId, seqInSection, isActive, isMale, createdBy, createdDate, modifiedBy, modifiedDate
+    id, label, sectionLabel, sectionId, seqInSection, isActive, isMale, createdBy, createdDate, modifiedBy, modifiedDate
   </sql>
   
    <select id="selectAllQuestions" resultMap="BaseResultMap" >
