@@ -35,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	function searchOtherRequestPlValues() {
+		document.all.selected_otherRequestIds.options.length = 0;// remove all options 
 		var selected_mainRequestId = document.getElementById("selected_mainRequestId").value;
 		if (selected_mainRequestId == "21") {
 			document.getElementById("otherRequest_div").style.display="none";
