@@ -15,7 +15,7 @@ Date: 2015-09-25 10:19:54
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `mewe_question`
+-- Table structure for `mewe_question` 
 -- ----------------------------
 DROP TABLE IF EXISTS `mewe_question`;
 CREATE TABLE `mewe_question` (
