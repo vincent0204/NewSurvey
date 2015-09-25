@@ -22,7 +22,7 @@
   </sql>
   
   <insert id="add" parameterType="com.mewe.pojo.Answer">
-	  insert into mewe.mewe_answer 
+	  insert into mewe_answer 
 	  (
 	    basicId, 
 	    answerDetailString, 
@@ -49,7 +49,7 @@
 	</insert>
 	
 	<update id="update" parameterType="com.mewe.pojo.Answer">
-	  update mewe.mewe_answer 
+	  update mewe_answer 
 	  set 
 		answerDetailString = #{answerdetailstring}, 
 		answerSectionString = #{answersectionstring}, 
@@ -66,7 +66,7 @@
 	<select id="search" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from mewe.mewe_answer
+    from mewe_answer
     where basicId = #{basicid}
   </select>
 </mapper>
