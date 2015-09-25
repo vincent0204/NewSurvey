@@ -27,16 +27,23 @@ public class InterventionEvaluationController {
 	
 	@Resource
 	private IQuestionService questionService;
+	
+	private QuestionModel questionModel;
 	private String globalBasicInfoId;
 	private int initSectionId = 1;
+	private String nextSection = null;
+	List<Question> questionList;
 	
 	@RequestMapping(value = "/toInterventionEvaluationPage", method = RequestMethod.GET)
 	public String toInterventionEvaluationPage(HttpServletRequest request,Model model,
 			@RequestParam String basicInfoId) {
-		System.out.println("Current section (toInterventionEvaluationPage) : " + initSectionId);
 		globalBasicInfoId = basicInfoId;
-		QuestionModel questionModel = new QuestionModel();
-		List<Question> questionList = this.questionService.getQuestionsInSection(initSectionId, basicInfoId);
+		nextSection = "0"+initSectionId;
+		questionList = this.questionService.getQuestionsInSection(nextSection, basicInfoId);
+		
+		questionModel = new QuestionModel();
+		questionModel.setBasicId(Integer.valueOf(globalBasicInfoId));
+		questionModel.setSectionId(nextSection);
 		questionModel.setQuestionList(questionList);
 		questionModel.setSectionLabel(questionList.get(0).getSectionLabel());
 		
@@ -46,14 +53,27 @@ public class InterventionEvaluationController {
 	}
 	
 	@RequestMapping(value = "/toNextInterventionEvaluationPage", method = RequestMethod.POST)
-	public String toNextInterventionEvaluationPage(HttpServletRequest request,Model model,
-			@ModelAttribute("contentModel") QuestionModel questionModel) {
+	public String toNextInterventionEvaluationPage(HttpServletRequest request,Model model, 
+			@ModelAttribute("questionModel") QuestionModel questionModel) {
+		if (initSectionId < 10) {
+			nextSection = "0"+initSectionId;
+		} else {
+			nextSection = String.valueOf(initSectionId);
+		}
+		questionModel.setSectionId(String.valueOf(nextSection));
 		initSectionId++;
-		System.out.println("Current section (toNextInterventionEvaluationPage) : " + initSectionId);
+		System.out.println("Current section : " + nextSection);
+		
 		if (initSectionId >14) return null;
 		
-		List<Question> questionList = this.questionService.getQuestionsInSection(
-				initSectionId, globalBasicInfoId);
+		// Auto calculate points
+		questionService.calculatePoints(request, questionList, questionModel);
+		
+		// Query next section
+		questionList = this.questionService.getQuestionsInSection(
+				nextSection, globalBasicInfoId);
+		questionModel = new QuestionModel();
+		questionModel.setBasicId(Integer.valueOf(globalBasicInfoId));
 		questionModel.setQuestionList(questionList);
 		questionModel.setSectionLabel(questionList.get(0).getSectionLabel());
 		

@@ -21,6 +21,6 @@ public class TestQuestionService {
 	@Test
 	public void testLoadQuestions() {
 		// service.getQuestionsInSection(11, "1");
-		service.getQuestionsInSection(11, "0");
+		service.getQuestionsInSection("11", "0");
 	}
 }

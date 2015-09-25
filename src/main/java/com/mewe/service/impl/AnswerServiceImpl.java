@@ -26,15 +26,15 @@ public class AnswerServiceImpl implements IAnswerService {
 		return dao.search(basicId);
 	}
 
-	public boolean addAnswer(QuestionModel ansModel) {
-//		Map<String, String> answerMap = ansModel.getAnswerMap();
-		int basicId = ansModel.getBasicId();
-//		String sectionId = ansModel.getSectionId();
+	public boolean addAnswer(QuestionModel questionModel) {
+		Map<String, String> questionAndAnswerMap = questionModel.getQuestionAndAnswerMap();
+		int basicId = questionModel.getBasicId();
+		String sectionId = questionModel.getSectionId();
 		
 		Answer ans = new Answer();
 		
 		ans.setBasicid(basicId);
-//		ans.setCurrentsection(sectionId);
+		ans.setCurrentsection(sectionId);
 		ans.setAnswerdetailstring("");
 		ans.setAnswersectionstring("");
 		ans.setPointtotal(0);
@@ -45,38 +45,40 @@ public class AnswerServiceImpl implements IAnswerService {
 		ans.setModifiedby("admin");
 		ans.setModifieddate(new Date());
 		
-//		computeAnswer(ans, sectionId, answerMap);
+		computeAnswer(ans, sectionId, questionAndAnswerMap);
 		
 		return dao.add(ans) == 1;
 	}
 
-	public boolean updateAnswer(QuestionModel ansModel) {
-//		Map<String, String> answerMap = ansModel.getAnswerMap();
-		int basicId = ansModel.getBasicId();
-//		String sectionId = ansModel.getSectionId();
+	public boolean updateAnswer(QuestionModel questionModel) {
+		Map<String, String> questionAndAnswerMap = questionModel.getQuestionAndAnswerMap();
+		int basicId = questionModel.getBasicId();
+		String sectionId = questionModel.getSectionId();
 		
 		Answer ans = this.retrieveAnswer(basicId);
 		if (ans == null) {
 			return false;
 		}
 		
-//		ans.setCurrentsection(sectionId);
+		ans.setCurrentsection(sectionId);
 		ans.setModifiedby("admin");
 		ans.setModifieddate(new Date());
 		
-//		computeAnswer(ans, sectionId, answerMap);
+		computeAnswer(ans, sectionId, questionAndAnswerMap);
 		
 		return dao.update(ans) == 1;
 	}
 
-	private void computeAnswer(Answer ans, String sectionId, Map<String, String> answerMap) {
+	private void computeAnswer(Answer ans, String sectionId, Map<String, String> questionAndAnswerMap) {
 		int points = 0;
 		String detail = "";
 		String sectionString = "01".equals(sectionId)? "" : "-";
 		String conclusionString = ans.getConclusionsectionstring().isEmpty()? "" : "-";
 		
-		for (String qId : answerMap.keySet()) {
-			String qPoint = answerMap.get(qId);
+		List<String> qList = new ArrayList<String>(questionAndAnswerMap.keySet());
+		Collections.sort(qList);
+		for (String qId : qList) {
+			String qPoint = questionAndAnswerMap.get(qId);
 			points += Integer.valueOf(qPoint);
 			
 			if ("0001".equals(qId)) {

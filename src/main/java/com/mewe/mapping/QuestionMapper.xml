@@ -5,7 +5,7 @@
     <result column="id" property="id" jdbcType="CHAR" />
     <result column="label" property="label" jdbcType="VARCHAR" />
     <result column="sectionLabel" property="sectionLabel" jdbcType="VARCHAR" />
-    <result column="sectionId" property="sectionid" jdbcType="INTEGER" />
+    <result column="sectionId" property="sectionid" jdbcType="VARCHAR" />
     <result column="seqInSection" property="seqinsection" jdbcType="INTEGER" />
     <result column="isActive" property="isactive" jdbcType="VARCHAR" />
     <result column="createdBy" property="createdby" jdbcType="VARCHAR" />

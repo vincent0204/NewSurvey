@@ -5,7 +5,7 @@ import java.util.Date;
 public class Question {
     private String id;
 
-    private Integer sectionid;
+    private String sectionid;
     
     private String sectionLabel;
     
@@ -49,15 +49,15 @@ public class Question {
         this.id = id == null ? null : id.trim();
     }
 
-    public Integer getSectionid() {
-        return sectionid;
-    }
+    public String getSectionid() {
+		return sectionid;
+	}
 
-    public void setSectionid(Integer sectionid) {
-        this.sectionid = sectionid;
-    }
+	public void setSectionid(String sectionid) {
+		this.sectionid = sectionid;
+	}
 
-    public Integer getSeqinsection() {
+	public Integer getSeqinsection() {
         return seqinsection;
     }
 

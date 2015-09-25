@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
 import com.mewe.dao.IBasicInfoDao;
 import com.mewe.dao.IQuestionDao;
+import com.mewe.model.QuestionModel;
 import com.mewe.pojo.Question;
+import com.mewe.service.IAnswerService;
 import com.mewe.service.IQuestionService;
 
 @SuppressWarnings("restriction")
@@ -21,8 +24,10 @@ public class QuestionServiceImpl implements IQuestionService {
 	private IQuestionDao dao;
 	@Resource
 	private IBasicInfoDao basicInfoDao;
+	@Resource
+	private IAnswerService answerService;
 	
-	private static Map<Integer, List<Question>> sectionMap;
+	private static Map<String, List<Question>> sectionMap;
 	
 	public void loadQuestions() {
 		System.out.println("loadingQuestions in section!");
@@ -32,7 +37,7 @@ public class QuestionServiceImpl implements IQuestionService {
 		System.out.println("questions ===>" +questions.size());
 		
 		for (Question question : questions) {
-			int sectionId = question.getSectionid();
+			String sectionId = question.getSectionid();
 			if (sectionMap.get(sectionId) == null) {
 				sectionMap.put(sectionId, new ArrayList<Question>());
 			}
@@ -45,17 +50,17 @@ public class QuestionServiceImpl implements IQuestionService {
 		System.out.println("loadQuestions in section finish!");
 	}
 	
-	public List<Question> getQuestionsInSection(Integer sectionId){
+	public List<Question> getQuestionsInSection(String sectionId){
 		
 		if(sectionMap == null){
-			sectionMap = new HashMap<Integer, List<Question>>();
+			sectionMap = new HashMap<String, List<Question>>();
 			loadQuestions();
 		}
 		
 		return sectionMap.get(sectionId);
 	}
 
-	public List<Question> getQuestionsInSection(Integer sectionId, String basicInfoId) {
+	public List<Question> getQuestionsInSection(String sectionId, String basicInfoId) {
 		String isMale = basicInfoDao.selectByPrimaryKey(basicInfoId).getSex();
 		List<Question> questionsInSection = getQuestionsInSection(sectionId);
 		List<Question> questions = new ArrayList<Question>();
@@ -69,4 +74,26 @@ public class QuestionServiceImpl implements IQuestionService {
 		
 		return questions;
 	}
+	
+	/**
+	 * @author Eric
+	 * @date 2015/09/24
+	 * @function Auto calculate points by section
+	 */
+	
+	public boolean calculatePoints(HttpServletRequest request,List<Question> questionList, 
+			QuestionModel questionModel) {
+		for (Question question : questionList) {
+			String point = request.getParameterValues(question.getId()+"answerVal")[0];
+			questionModel.getQuestionAndAnswerMap().put(question.getId(), point);
+			
+			System.out.println(
+					"SectionLabel "+ questionModel.getSectionLabel() + 
+					" recordId==>"+question.getId() + 
+					" point : " + point);
+		}
+		
+		return answerService.addAnswer(questionModel);
+	}
+	
 }

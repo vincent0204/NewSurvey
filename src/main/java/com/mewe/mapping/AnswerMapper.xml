@@ -36,37 +36,37 @@
 	  ) 
 	  values
 	  (
-	    #{basicId}, 
-	    #{answerDetailString}, 
-	    #{answerSectionString}, 
-	    #{currentSection}, 
-	    #{pointTotal}
-	    #{createdBy},
-	  	#{createdDate}, 
-	  	#{modifiedBy},
-	  	#{modifiedDate}  
+	    #{basicid}, 
+	    #{answerdetailstring}, 
+	    #{answersectionstring}, 
+	    #{currentsection}, 
+	    #{pointtotal},
+	    #{createdby},
+	  	#{createddate}, 
+	  	#{modifiedby},
+	  	#{modifieddate}  
 	  )
 	</insert>
 	
 	<update id="update" parameterType="com.mewe.pojo.Answer">
 	  update mewe.mewe_answer 
 	  set 
-		answerDetailString = #{answerDetailString}, 
-		answerSectionString = #{answerSectionString}, 
-		currentSection = #{currentSection}, 
-		pointTotal = #{pointTotal}, 
+		answerDetailString = #{answerdetailstring}, 
+		answerSectionString = #{answersectionstring}, 
+		currentSection = #{currentsection}, 
+		pointTotal = #{pointtotal}, 
 		conclusionsectionstring = #{conclusionsectionstring},
-		finalConclusion = #{finalConclusion},
-		modifiedBy = #{modifiedBy},
-		modifiedDate = #{modifiedDate}  
+		finalConclusion = #{finalconclusion},
+		modifiedBy = #{modifiedby},
+		modifiedDate = #{modifieddate}  
 	  where 
-	  	basicId = #{basicId}
+	  	basicId = #{basicid}
 	</update>
 	
 	<select id="search" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from mewe.mewe_answer
-    where basicId = #{basicId}
+    where basicId = #{basicid}
   </select>
 </mapper>

@@ -17,8 +17,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=basePath %>css/bootstrap.min.css" type="text/css"></link>
 	<link rel="stylesheet" href="<%=basePath %>css/layout.css" type="text/css"></link>
     </head>
+    <style type="text/css">
+	span{
+		margin-left: 2%;
+		margin-right: 5%;
+	}
+	
+</style>
     <body>
-    <form action="toNextInterventionEvaluationPage" method="post">
+    <form:form action="toNextInterventionEvaluationPage" modelAttribute="questionModel" method="post">
         <div class="section">
 	        <br/>
 	        	<center>
@@ -35,7 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <br/>
 	            </div>
 	            <br/>
-	            
+	            <form:hidden path="basicId"/>
+		        <form:hidden path="sectionId"/>
 	            <a id="link" data-toggle="collapse" data-parent="#accordion" data-target="#section_one">
 		            <div class="btn-success title">
 		                <span><font size="+1">&nbsp;&nbsp;${questionModel.sectionLabel}</font></span>
@@ -46,11 +54,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <div class="row section_div">
 		                    <div class="col-sm-6">
 		                        <div id="FieldLable"><b>${question.label}</b></div>
-		                        <div id="Input"><select class="form-control" name="zhengzhuang1" id = "zhengzhuang1">
-		                            <option value="0">无</option>
-		                            <option value="1">轻</option>
-		                            <option value="2">重</option>
-		                        </select></div>
+		                        <br/>
+									<input type="radio" name="${question.id}answerVal" value="0" checked="checked"/><span>无</span>
+									<input type="radio" name="${question.id}answerVal" value="1" /><span>轻</span>
+									<input type="radio" name="${question.id}answerVal" value="2" /><span>重</span>
 		                    </div>
 		                </div>
 		         	</div>
@@ -75,6 +82,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
             <br/>
         </div>
-        </form>
+        </form:form>
   </body>
 </html>

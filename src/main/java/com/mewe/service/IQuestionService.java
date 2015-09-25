@@ -5,6 +5,9 @@ package com.mewe.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.mewe.model.QuestionModel;
 import com.mewe.pojo.Question;
 
 /**
@@ -13,5 +16,8 @@ import com.mewe.pojo.Question;
  */
 public interface IQuestionService {
 	
-	List<Question> getQuestionsInSection(Integer sectionId, String basicInfoId);
+	List<Question> getQuestionsInSection(String sectionId, String basicInfoId);
+	
+	boolean calculatePoints(HttpServletRequest request,List<Question> questionList, 
+			QuestionModel questionModel);
 }
