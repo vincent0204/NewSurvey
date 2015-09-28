@@ -55,30 +55,37 @@ public class InterventionEvaluationController {
 	@RequestMapping(value = "/toNextInterventionEvaluationPage", method = RequestMethod.POST)
 	public String toNextInterventionEvaluationPage(HttpServletRequest request,Model model, 
 			@ModelAttribute("questionModel") QuestionModel questionModel) {
+		// Auto calculate points
+		questionService.autoCalculatePoints(request, questionList, questionModel);
+		
+		initSectionId++;
+		// More than 14
+		if (initSectionId >14) return "showResult";
+		
 		if (initSectionId < 10) {
 			nextSection = "0"+initSectionId;
 		} else {
 			nextSection = String.valueOf(initSectionId);
 		}
 		questionModel.setSectionId(String.valueOf(nextSection));
-		initSectionId++;
 		System.out.println("Current section : " + nextSection);
-		
-		if (initSectionId >14) return null;
-		
-		// Auto calculate points
-		questionService.calculatePoints(request, questionList, questionModel);
 		
 		// Query next section
 		questionList = this.questionService.getQuestionsInSection(
 				nextSection, globalBasicInfoId);
 		questionModel = new QuestionModel();
 		questionModel.setBasicId(Integer.valueOf(globalBasicInfoId));
+		questionModel.setSectionId(nextSection);
 		questionModel.setQuestionList(questionList);
 		questionModel.setSectionLabel(questionList.get(0).getSectionLabel());
 		
 		model.addAttribute("questionModel", questionModel);
 		
 		return "interventionEvaluation";
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test(HttpServletRequest request,Model model) {
+		return "showResult";
 	}
 }

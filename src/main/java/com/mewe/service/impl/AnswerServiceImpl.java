@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.mewe.dao.IAnswerDao;
 import com.mewe.model.QuestionModel;
@@ -73,7 +75,7 @@ public class AnswerServiceImpl implements IAnswerService {
 		int points = 0;
 		String detail = "";
 		String sectionString = "01".equals(sectionId)? "" : "-";
-		String conclusionString = ans.getConclusionsectionstring().isEmpty()? "" : "-";
+		String conclusionString = StringUtils.isEmpty(ans.getConclusionsectionstring())? "" : "-";
 		
 		List<String> qList = new ArrayList<String>(questionAndAnswerMap.keySet());
 		Collections.sort(qList);
@@ -98,12 +100,12 @@ public class AnswerServiceImpl implements IAnswerService {
 		int conPoints = intervenedSections.contains(sectionId)? points - 3 : points - 6;
 		if (conPoints > 0) {
 			conclusionString += sectionId + String.valueOf(conPoints);
+			ans.setConclusionsectionstring(ans.getConclusionsectionstring() + conclusionString);
 		} 
 		
 		ans.setPointtotal(ans.getPointtotal() + points);
 		ans.setAnswersectionstring(ans.getAnswersectionstring() + sectionString);
 		ans.setAnswerdetailstring(ans.getAnswerdetailstring() + detail);
-		ans.setConclusionsectionstring(ans.getConclusionsectionstring() + conclusionString);
 		
 		if ("14".equals(sectionId)) {
 			setFinalConclusion(ans);
@@ -126,7 +128,15 @@ public class AnswerServiceImpl implements IAnswerService {
 		
 		List<String> conList = new ArrayList<String>(conMap.keySet());
 		Collections.sort(conList);
-		conList = conList.subList(0, Math.min(conList.size(), 3));
-		ans.setFinalconclusion(String.join("-", conList));
+		int fromIndex = conList.size() - 3 > 0 ? conList.size() - 3 : 0;
+		int toIndex = conList.size();
+		
+		conList = conList.subList(fromIndex, toIndex);
+		
+		List<String> resList = new ArrayList<String>();
+		for (String res : conList) {
+			resList.add(conMap.get(res));
+		}
+		ans.setFinalconclusion(String.join("-", resList));
 	} 
 }

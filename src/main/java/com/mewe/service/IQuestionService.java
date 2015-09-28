@@ -18,6 +18,6 @@ public interface IQuestionService {
 	
 	List<Question> getQuestionsInSection(String sectionId, String basicInfoId);
 	
-	boolean calculatePoints(HttpServletRequest request,List<Question> questionList, 
+	boolean autoCalculatePoints(HttpServletRequest request,List<Question> questionList, 
 			QuestionModel questionModel);
 }

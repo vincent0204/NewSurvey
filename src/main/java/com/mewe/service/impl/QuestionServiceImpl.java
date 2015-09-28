@@ -81,8 +81,9 @@ public class QuestionServiceImpl implements IQuestionService {
 	 * @function Auto calculate points by section
 	 */
 	
-	public boolean calculatePoints(HttpServletRequest request,List<Question> questionList, 
+	public boolean autoCalculatePoints(HttpServletRequest request,List<Question> questionList, 
 			QuestionModel questionModel) {
+		
 		for (Question question : questionList) {
 			String point = request.getParameterValues(question.getId()+"answerVal")[0];
 			questionModel.getQuestionAndAnswerMap().put(question.getId(), point);
@@ -93,7 +94,10 @@ public class QuestionServiceImpl implements IQuestionService {
 					" point : " + point);
 		}
 		
-		return answerService.addAnswer(questionModel);
+		if (Integer.valueOf(questionModel.getSectionId()) == 1) {
+			return answerService.addAnswer(questionModel);
+		}else {
+			return answerService.updateAnswer(questionModel);
+		}
 	}
-	
 }

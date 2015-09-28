@@ -42,8 +42,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <br/>
 	            </div>
 	            <br/>
+	            
 	            <form:hidden path="basicId"/>
 		        <form:hidden path="sectionId"/>
+		        
 	            <a id="link" data-toggle="collapse" data-parent="#accordion" data-target="#section_one">
 		            <div class="btn-success title">
 		                <span><font size="+1">&nbsp;&nbsp;${questionModel.sectionLabel}</font></span>
@@ -72,14 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <input type="submit" class = "btn-success submit" style="width: 100%;"  value="保存并下一步"/>
                 </div>
             </center>   
-            <br/>
-            
-            <center>
-                <div class= "section">
-                    <span id="requiredFieldInfo"></span>
-                </div>
-            </center>   
-            
             <br/>
         </div>
         </form:form>
