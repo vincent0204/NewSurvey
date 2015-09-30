@@ -6,5 +6,5 @@ public interface IRequestService {
 
 	Map<String, String> queryAllMainRequestMap();
 	
-	Map<String, String> queryAllOtherRequestMap(String mainRequestId);
+	Map<String, String> queryAllSubRequestMap(String mainRequestId);
 }

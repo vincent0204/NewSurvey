@@ -18,13 +18,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<center>
        	<div>
-          <img src="<%=basePath %>images/jibingtupu.jpg"/>
+           <img src="<%=basePath %>images/mewe.jpg"/>
+        </div>
+        
+        <br/>
+	
+       	<div>
+          <img src="<%=basePath %>images/${evaluationResultsModel.imageName}"/>
         </div>
         <br/>
         
        	<div style="width: 95%; vertical-align: middle; margin:auto;">
             <span>
-             	<font size="+1">您的健康状况属于"中度亚健康("潜临床"状态)"</font>
+             	<font size="+1">您的健康状况属于"${evaluationResultsModel.description}"</font>
 			</span>
         </div>
 	    <br/>

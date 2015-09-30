@@ -13,7 +13,9 @@
     <result column="workEnvironment" jdbcType="CHAR" property="workenvironment" />
     <result column="otherWorkEnvironment" jdbcType="CHAR" property="otherworkenvironment" />
     <result column="mainReq" jdbcType="CHAR" property="mainreq" />
-    <result column="otherReq" jdbcType="VARCHAR" property="otherreq" />
+    <result column="mainSubReq" jdbcType="VARCHAR" property="mainsubreq" />
+    <result column="otherReq" jdbcType="CHAR" property="otherreq" />
+    <result column="otherSubReq" jdbcType="VARCHAR" property="othersubreq" />
     <result column="createdBy" jdbcType="VARCHAR" property="createdby" />
     <result column="createdDate" jdbcType="TIMESTAMP" property="createddate" />
     <result column="modifiedBy" jdbcType="VARCHAR" property="modifiedby" />
@@ -23,7 +25,7 @@
   
   <sql id="BasicInfo_Column_List" >
     id, wechatId, username, phone, sex, age, height, weight, workEnvironment, otherWorkEnvironment, 
-    mainReq, otherReq, createdBy, createdDate, modifiedBy, isActive, modifiedDate
+    mainReq, mainsubreq, otherReq, othersubreq, createdBy, createdDate, modifiedBy, isActive, modifiedDate
   </sql>
   
   <!-- Start Eric 2015/09/02 -->
@@ -31,13 +33,15 @@
     insert into mewe_basic_info (wechatId, username, 
       phone, sex, age, height, 
       weight, workEnvironment, otherWorkEnvironment, 
-      mainReq, otherReq, createdBy, 
+      mainReq, mainsubreq, otherReq, othersubreq, createdBy, 
       createdDate, modifiedBy, isActive, 
       modifiedDate)
     values (#{wechatid,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
       #{phone,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{height,jdbcType=CHAR}, 
       #{weight,jdbcType=CHAR}, #{workenvironment,jdbcType=CHAR}, #{otherworkenvironment,jdbcType=CHAR}, 
-      #{mainreq,jdbcType=CHAR}, #{otherreq,jdbcType=VARCHAR}, #{createdby,jdbcType=VARCHAR}, 
+      #{mainreq,jdbcType=CHAR}, #{mainsubreq,jdbcType=VARCHAR}, #{otherreq,jdbcType=CHAR}, 
+      #{othersubreq,jdbcType=VARCHAR},
+      #{createdby,jdbcType=VARCHAR}, 
       #{createddate,jdbcType=TIMESTAMP}, #{modifiedby,jdbcType=VARCHAR}, #{isactive,jdbcType=CHAR}, 
       #{modifieddate,jdbcType=TIMESTAMP})
   </insert>
@@ -59,7 +63,9 @@
       workEnvironment = #{workenvironment,jdbcType=CHAR},
       otherWorkEnvironment = #{otherworkenvironment,jdbcType=CHAR},
       mainReq = #{mainreq,jdbcType=CHAR},
-      otherReq = #{otherreq,jdbcType=VARCHAR},
+      mainsubreq = #{mainsubreq,jdbcType=VARCHAR},
+      otherreq = #{otherreq,jdbcType=CHAR},
+      othersubreq = #{othersubreq,jdbcType=VARCHAR},
       createdBy = #{createdby,jdbcType=VARCHAR},
       createdDate = #{createddate,jdbcType=TIMESTAMP},
       isActive = #{isactive,jdbcType=CHAR}

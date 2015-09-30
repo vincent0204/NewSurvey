@@ -17,11 +17,20 @@ public class QuestionModel {
 	
 	private String sectionLabel;
 	
+	private String buttonFlag;
+	
 	private Map<String, String> questionAndAnswerMap = new HashMap<String, String>();
 	
 	private List<Question> questionList = new ArrayList<Question>();
-	
-	
+
+	public String getButtonFlag() {
+		return buttonFlag;
+	}
+
+	public void setButtonFlag(String buttonFlag) {
+		this.buttonFlag = buttonFlag;
+	}
+
 	public Map<String, String> getQuestionAndAnswerMap() {
 		return questionAndAnswerMap;
 	}

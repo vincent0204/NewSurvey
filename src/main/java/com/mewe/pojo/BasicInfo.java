@@ -25,8 +25,12 @@ public class BasicInfo {
 
     private String mainreq;
 
+    private String mainsubreq;
+    
     private String otherreq;
 
+    private String othersubreq;
+    
     private String createdby;
 
     private Date createddate;
@@ -37,7 +41,23 @@ public class BasicInfo {
 
     private Date modifieddate;
 
-    public Integer getId() {
+    public String getMainsubreq() {
+		return mainsubreq;
+	}
+
+	public void setMainsubreq(String mainsubreq) {
+		this.mainsubreq = mainsubreq;
+	}
+
+	public String getOthersubreq() {
+		return othersubreq;
+	}
+
+	public void setOthersubreq(String othersubreq) {
+		this.othersubreq = othersubreq;
+	}
+
+	public Integer getId() {
         return id;
     }
 

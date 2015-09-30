@@ -27,7 +27,7 @@ public class RequestServiceImpl implements IRequestService {
 		return mainRequestMap;
 	}
 
-	public Map<String, String> queryAllOtherRequestMap(String mainRequestId) {
+	public Map<String, String> queryAllSubRequestMap(String mainRequestId) {
 		Map<String, String> otherRequestMap = new HashMap<String, String>();
 		
 		for (PicklistRequest plTemp : this.picklistRequestDao.selectAllOtherRequestsByMainReqId(mainRequestId)) {

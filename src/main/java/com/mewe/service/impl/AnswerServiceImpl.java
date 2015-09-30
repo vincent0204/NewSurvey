@@ -13,8 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.mewe.dao.IAnswerDao;
+import com.mewe.dao.IBasicInfoDao;
+import com.mewe.model.EvaluationResultsModel;
 import com.mewe.model.QuestionModel;
 import com.mewe.pojo.Answer;
+import com.mewe.pojo.BasicInfo;
 import com.mewe.service.IAnswerService;
 
 @SuppressWarnings("restriction")
@@ -23,6 +26,10 @@ public class AnswerServiceImpl implements IAnswerService {
 
 	@Resource
 	private IAnswerDao dao;
+	@Resource
+	private IBasicInfoDao basicInfoDao;
+	
+	private EvaluationResultsModel evaluationResultsModel;
 	
 	public Answer retrieveAnswer(int basicId) {
 		return dao.search(basicId);
@@ -138,5 +145,57 @@ public class AnswerServiceImpl implements IAnswerService {
 			resList.add(conMap.get(res));
 		}
 		ans.setFinalconclusion(String.join("-", resList));
+	}
+
+	/**
+	 * @author Eric
+	 * @date 2015/09/28
+	 */
+	public EvaluationResultsModel autoMappingForPointsAndImages(String basicInfoId) {
+		int sum = 0;
+		evaluationResultsModel = new EvaluationResultsModel();
+		Integer pointtotal = this.retrieveAnswer(Integer.valueOf(basicInfoId)).getPointtotal();
+		BasicInfo basicInfo = this.basicInfoDao.selectByPrimaryKey(basicInfoId);
+		
+		// 慢性病 record id 20
+		// 主诉求
+		if (!StringUtils.isEmpty(basicInfo.getMainreq()) && 
+				20 == Integer.valueOf(basicInfo.getMainreq())) {
+			if (!StringUtils.isEmpty(basicInfo.getMainsubreq())) sum++;
+		}
+		
+		// 其他诉求
+		if (!StringUtils.isEmpty(basicInfo.getOtherreq()) &&
+				20 == Integer.valueOf(basicInfo.getMainreq())) {
+			if (!StringUtils.isEmpty(basicInfo.getOthersubreq())) 
+				sum = sum + basicInfo.getOthersubreq().split(",").length;
+		}
+		
+		if (sum > 0 && sum <= 2) {
+			evaluationResultsModel.setImageName("jibingzaoqi.jpg");
+			evaluationResultsModel.setDescription("疾病早期");
+		}else if (sum >= 3 && sum <= 4) {
+			evaluationResultsModel.setImageName("jibingzhognqi.jpg");
+			evaluationResultsModel.setDescription("疾病中期");
+		}else if (sum >= 5) {
+			evaluationResultsModel.setImageName("jibingtupu.jpg");
+			evaluationResultsModel.setDescription("疾病晚期");
+		}else {
+			if (pointtotal == 0) {
+				evaluationResultsModel.setImageName("jibingtupu.jpg");
+				evaluationResultsModel.setDescription("健康");
+			}else if (pointtotal >= 1 &&  pointtotal <= 27) {
+				evaluationResultsModel.setImageName("qingduyajiankang.jpg");
+				evaluationResultsModel.setDescription("轻度亚健康(轻度身心失调)");
+			}else if (pointtotal >= 28 && pointtotal <= 83) {
+				evaluationResultsModel.setImageName("zhongduyajiankang.jpg");
+				evaluationResultsModel.setDescription("中度亚健康('潜临床'状态)");
+			}else if (pointtotal >= 84) {
+				evaluationResultsModel.setImageName("zhongduyajiankang2.jpg");
+				evaluationResultsModel.setDescription("重度亚健康('前临床'状态)");
+			}
+		}
+		
+		return evaluationResultsModel;
 	} 
 }

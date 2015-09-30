@@ -23,9 +23,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		margin-right: 5%;
 	}
 	
-</style>
-    <body>
-    <form:form action="toNextInterventionEvaluationPage" modelAttribute="questionModel" method="post">
+	</style>
+	<script type="text/javascript">
+		function submitFun(obj) {
+			document.getElementById("buttonFlag").value = obj;
+			document.getElementById("formid").submit();
+		}
+		
+		function disableLastButton() {
+			var sectionId = document.getElementById("sectionId").value;
+			if (sectionId == "01") document.getElementById("lastButton").style.display="none"; return;
+			
+			document.getElementById("lastButton").style.display="block";
+		}
+	</script>
+	
+    <body onload="disableLastButton();">
+    <form:form id="formid" action="toNextInterventionEvaluationPage" modelAttribute="questionModel" method="post">
         <div class="section">
 	        <br/>
 	        	<center>
@@ -45,10 +59,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            
 	            <form:hidden path="basicId"/>
 		        <form:hidden path="sectionId"/>
+		        <form:hidden id="buttonFlag" path="buttonFlag"/>
 		        
 	            <a id="link" data-toggle="collapse" data-parent="#accordion" data-target="#section_one">
 		            <div class="btn-success title">
-		                <span><font size="+1">&nbsp;&nbsp;${questionModel.sectionLabel}</font></span>
+		                <span><font size="+1">&nbsp;&nbsp;${questionModel.sectionLabel }</font></span>
 		            </div></a>
 	            <c:forEach var="question" items="${questionModel.questionList}">
 		            <div id = "section_one"  class="collapse in section">
@@ -71,7 +86,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     
             <center>
                 <div class= "section">
-                    <input type="submit" class = "btn-success submit" style="width: 100%;"  value="保存并下一步"/>
+                    <input id="lastButton" type="button" class = "btn-success submit" style="width: 40%;"
+                     value="上一步" onclick="submitFun('last');" />
+                    <input type="button" class = "btn-success submit" style="width: 40%;"  
+                    value="下一步" onclick="submitFun('next');" />
                 </div>
             </center>   
             <br/>
