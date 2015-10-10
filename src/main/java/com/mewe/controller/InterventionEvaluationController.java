@@ -24,7 +24,7 @@ public class InterventionEvaluationController {
 	/**
 	 * @author Eric
 	 * @date   2015/09/19
-	 * @function Question Survery 
+	 * @function Question Survey 
 	 */
 	
 	@Resource
@@ -44,8 +44,10 @@ public class InterventionEvaluationController {
 			@RequestParam String basicInfoId) {
 		globalBasicInfoId = basicInfoId;
 		nextSection = "0"+initSectionId;
+		System.out.println("nextSection" + nextSection);
+		System.out.println("basicInfoId in interventionEvaluationController : " + basicInfoId);
 		questionList = this.questionService.getQuestionsInSection(nextSection, basicInfoId);
-		
+		 
 		questionModel = new QuestionModel();
 		questionModel.setBasicId(Integer.valueOf(globalBasicInfoId));
 		questionModel.setSectionId(nextSection);

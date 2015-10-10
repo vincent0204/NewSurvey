@@ -13,4 +13,5 @@ public interface IAnswerService {
 	Answer retrieveAnswer(int basicId);
 	
 	EvaluationResultsModel autoMappingForPointsAndImages(String basicInfoId);// Eric
+
 }

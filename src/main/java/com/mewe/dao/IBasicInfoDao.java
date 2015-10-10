@@ -16,7 +16,9 @@ public interface IBasicInfoDao {
 //	int updateByPrimaryKey(BasicInfo record);
 	
     BasicInfo selectByPrimaryKey(String id);
-    
+
     int updateBasicInfoById(BasicInfo record);
+    
+    BasicInfo searchId (int id);
 
 }

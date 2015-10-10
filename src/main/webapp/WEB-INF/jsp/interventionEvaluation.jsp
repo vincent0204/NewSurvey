@@ -36,6 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			document.getElementById("lastButton").style.display="block";
 		}
+
 	</script>
 	
     <body onload="disableLastButton();">

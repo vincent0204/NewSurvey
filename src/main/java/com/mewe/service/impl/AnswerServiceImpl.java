@@ -26,6 +26,7 @@ public class AnswerServiceImpl implements IAnswerService {
 
 	@Resource
 	private IAnswerDao dao;
+
 	@Resource
 	private IBasicInfoDao basicInfoDao;
 	
@@ -34,35 +35,51 @@ public class AnswerServiceImpl implements IAnswerService {
 	public Answer retrieveAnswer(int basicId) {
 		return dao.search(basicId);
 	}
+	
+	public BasicInfo searchBasicId (int basicId) {
+		return basicInfoDao.searchId(basicId);
+	}
 
 	public boolean addAnswer(QuestionModel questionModel) {
 		Map<String, String> questionAndAnswerMap = questionModel.getQuestionAndAnswerMap();
 		int basicId = questionModel.getBasicId();
 		String sectionId = questionModel.getSectionId();
 		
-		Answer ans = new Answer();
+			if (dao.search(basicId) != null) {
+				return this.updateAnswer(questionModel);
+			}
 		
-		ans.setBasicid(basicId);
-		ans.setCurrentsection(sectionId);
-		ans.setAnswerdetailstring("");
-		ans.setAnswersectionstring("");
-		ans.setPointtotal(0);
-		ans.setConclusionsectionstring("");
-		ans.setFinalconclusion("");
-		ans.setCreatedby("admin");
-		ans.setCreateddate(new Date());
-		ans.setModifiedby("admin");
-		ans.setModifieddate(new Date());
 		
-		computeAnswer(ans, sectionId, questionAndAnswerMap);
 		
-		return dao.add(ans) == 1;
+			Answer ans = new Answer();
+			
+			ans.setBasicid(basicId);
+			ans.setCurrentsection(sectionId);
+			ans.setAnswerdetailstring("");
+			ans.setAnswersectionstring("");
+			ans.setPointtotal(0);
+			ans.setConclusionsectionstring("");
+			ans.setFinalconclusion("");
+			ans.setCreatedby("admin");
+			ans.setCreateddate(new Date());
+			ans.setModifiedby("admin");
+			ans.setModifieddate(new Date());
+			
+			computeAnswer(ans, sectionId, questionAndAnswerMap);
+			
+			return dao.add(ans) == 1;
+		
+		
+		
+		
 	}
 
 	public boolean updateAnswer(QuestionModel questionModel) {
 		Map<String, String> questionAndAnswerMap = questionModel.getQuestionAndAnswerMap();
 		int basicId = questionModel.getBasicId();
 		String sectionId = questionModel.getSectionId();
+		
+		
 		
 		Answer ans = this.retrieveAnswer(basicId);
 		if (ans == null) {

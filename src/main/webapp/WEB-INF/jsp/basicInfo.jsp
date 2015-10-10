@@ -66,7 +66,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				success: function(data){
 					var html = "<option value=''>"+ "--请选择--" + "</option>";
 					$.each(data, function(i, item) {
-						 html += "<option value='" + i + "'>" + item + "";
+						console.log(data[i]);
+						html += "<option value='" + i + "'>" + item + "</options>";
 			        });
 					$(html).appendTo("#selected_mainSubRequestId");
 				}

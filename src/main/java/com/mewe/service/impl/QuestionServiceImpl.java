@@ -27,6 +27,8 @@ public class QuestionServiceImpl implements IQuestionService {
 	@Resource
 	private IAnswerService answerService;
 	
+	
+	
 	private static Map<String, List<Question>> sectionMap;
 	
 	public void loadQuestions() {
@@ -61,12 +63,13 @@ public class QuestionServiceImpl implements IQuestionService {
 	}
 
 	public List<Question> getQuestionsInSection(String sectionId, String basicInfoId) {
+		System.out.println("basicInfoId in QuestionServiceImpl : " + basicInfoId);
 		String isMale = basicInfoDao.selectByPrimaryKey(basicInfoId).getSex();
 		List<Question> questionsInSection = getQuestionsInSection(sectionId);
 		List<Question> questions = new ArrayList<Question>();
 		
 		for (Question question : questionsInSection) {
-			if (isMale.equals(question.getIsMale())) {
+			if ("2".equals(question.getIsMale()) ||  isMale.equals(question.getIsMale())) {
 				questions.add(question);
 				System.out.println(question.getId() + ", " + question.getLabel());
 			}
@@ -80,7 +83,6 @@ public class QuestionServiceImpl implements IQuestionService {
 	 * @date 2015/09/24
 	 * @function Auto calculate points by section
 	 */
-	
 	public boolean autoCalculatePoints(HttpServletRequest request,List<Question> questionList, 
 			QuestionModel questionModel) {
 		
@@ -94,10 +96,13 @@ public class QuestionServiceImpl implements IQuestionService {
 					" point : " + point);
 		}
 		
+		
+
 		if (Integer.valueOf(questionModel.getSectionId()) == 1) {
 			return answerService.addAnswer(questionModel);
 		}else {
 			return answerService.updateAnswer(questionModel);
 		}
+	
 	}
 }

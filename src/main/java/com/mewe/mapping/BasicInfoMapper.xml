@@ -71,6 +71,13 @@
       isActive = #{isactive,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>	
+  
+  <select id="searchId" resultMap="BasicInfoResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="BasicInfo_Column_List" />
+    from mewe_basic_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
 
   <!-- End -->
   
