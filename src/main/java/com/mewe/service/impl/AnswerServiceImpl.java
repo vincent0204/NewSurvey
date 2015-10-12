@@ -149,7 +149,7 @@ public class AnswerServiceImpl implements IAnswerService {
 			points = points.length() == 1 ? "0" + points : points;
 			conMap.put(points + sectionId, sectionId);
 		}
-		
+		 
 		List<String> conList = new ArrayList<String>(conMap.keySet());
 		Collections.sort(conList);
 		int fromIndex = conList.size() - 3 > 0 ? conList.size() - 3 : 0;
