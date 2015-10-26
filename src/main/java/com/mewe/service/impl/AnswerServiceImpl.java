@@ -27,10 +27,15 @@ public class AnswerServiceImpl implements IAnswerService {
 	@Resource
 	private IAnswerDao dao;
 
-	@Resource
+	@Resource 
 	private IBasicInfoDao basicInfoDao;
 	
 	private EvaluationResultsModel evaluationResultsModel;
+	
+	public int update(Answer answer){
+		
+		return this.dao.update(answer);
+	}
 	
 	public Answer retrieveAnswer(int basicId) {
 		return dao.search(basicId);

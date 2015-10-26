@@ -75,4 +75,10 @@ public class BasicInfoController {
     	return this.irequestService.queryAllSubRequestMap(selected_mainOrOtherRequestId);
     }
     
+    @RequestMapping(value = "/ajaxQueryOtherReq", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> ajaxQueryOtherReq(HttpServletRequest request,Model model) {
+    	return this.irequestService.queryAllOtherRequestMap();
+    }
+    
 }

@@ -27,7 +27,7 @@ public class BasicInfoModel {
 	
 	private String mainSubRequestOther;
 	
-	private String[] selected_otherSubRequestIds;
+	private String selected_otherSubRequestIds;
 	
 	private String selected_otherRequestId;
 	
@@ -125,10 +125,10 @@ public class BasicInfoModel {
 	public void setOtherRequestMap(Map<String, String> otherRequestMap) {
 		this.otherRequestMap = otherRequestMap;
 	}
-	public String[] getSelected_otherSubRequestIds() {
+	public String getSelected_otherSubRequestIds() {
 		return selected_otherSubRequestIds;
 	}
-	public void setSelected_otherSubRequestIds(String[] selected_otherSubRequestIds) {
+	public void setSelected_otherSubRequestIds(String selected_otherSubRequestIds) {
 		this.selected_otherSubRequestIds = selected_otherSubRequestIds;
 	}
 	public String getSelected_workEnvironmentId() {
@@ -149,5 +149,5 @@ public class BasicInfoModel {
 	public void setWorkEnvironmentMap(Map<String, String> workEnvironmentMap) {
 		this.workEnvironmentMap = workEnvironmentMap;
 	}
-	
+
 }

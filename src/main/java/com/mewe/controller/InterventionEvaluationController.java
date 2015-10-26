@@ -1,5 +1,6 @@
 package com.mewe.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mewe.model.EvaluationResultsModel;
 import com.mewe.model.QuestionModel;
+import com.mewe.pojo.Answer;
+import com.mewe.pojo.Conclusion;
 import com.mewe.pojo.Question;
 import com.mewe.service.IAnswerService;
+import com.mewe.service.IConclusionService;
 import com.mewe.service.IQuestionService;
 
 @Controller  
@@ -31,9 +35,12 @@ public class InterventionEvaluationController {
 	private IQuestionService questionService;
 	@Resource
 	private IAnswerService answerService;
+	@Resource
+	private IConclusionService conclusionService;
 	
 	private QuestionModel questionModel;
 	private EvaluationResultsModel evaluationResultsModel;
+	private Conclusion conclusion;
 	private String globalBasicInfoId;
 	private int initSectionId = 1;
 	private String nextSection = null;
@@ -69,8 +76,40 @@ public class InterventionEvaluationController {
 			if (initSectionId <= 0)	{
 				initSectionId = 1;
 				nextSection = null;
+				
 //				return "redirect:/basicInfoController/toBasicInfoPage?basicInfoId="+globalBasicInfoId;
-			}
+			}else{
+				
+			     Answer answer = answerService.retrieveAnswer(Integer.parseInt(globalBasicInfoId)); 
+			     if(initSectionId>1){
+			        String[] answerDetailString = (answer.getAnswerdetailstring()).split("-");
+			      	String newanswerDetailString = "";
+			    	 for(int i = 0; i<(initSectionId-1)*6;i++){
+			    		 if(i<(initSectionId-1)*6-1){
+			    			 newanswerDetailString+=answerDetailString[i]+"-";
+			    		 }else{
+			    			 newanswerDetailString+=answerDetailString[i];
+			    		 }
+			    		}
+			     
+			    	 String[] answerSectionString = (answer.getAnswersectionstring()).split("-");
+			    	 String newanswerScetionString = ""; 
+			    	 for(int i = 0; i<initSectionId-1;i++){
+			    		 if(i<initSectionId-2){
+			    			 newanswerScetionString+=answerSectionString[i]+"-";
+			    		 }else{
+			    			 newanswerScetionString+=answerSectionString[i];
+			    		 }
+			    		}
+			    	 answer.setAnswerdetailstring(newanswerDetailString);
+			    	 answer.setAnswersectionstring(newanswerScetionString);
+			    	 answerService.update(answer);
+			     }else{
+			    	 answer.setAnswerdetailstring("");
+			    	 answer.setAnswersectionstring("");
+			    	 answerService.update(answer);
+			     }
+				}
 		}else {// next
 			// Auto calculate points
 			questionService.autoCalculatePoints(request, questionList, questionModel);
@@ -110,5 +149,24 @@ public class InterventionEvaluationController {
 		
 		model.addAttribute("evaluationResultsModel", evaluationResultsModel);
 		return "showResult";
+	}
+	
+	@RequestMapping( value = "/toEvaluationResult", method = RequestMethod.POST)
+	public String toEvaluationResult(HttpServletRequest request,Model model){
+		
+		initSectionId = 1;
+		nextSection = null;
+		
+		String finalConclusion = (answerService.retrieveAnswer(Integer.parseInt(globalBasicInfoId))).getFinalconclusion();
+	    String[] conclusionArray = finalConclusion.split("-");
+	    
+		List<Conclusion>  list = new ArrayList<Conclusion>();
+		for(int i = 0; i < conclusionArray.length;i++){
+			list.add(conclusionService.selectBySectionId(conclusionArray[i]));
+		}
+		
+		model.addAttribute("erlist", list);
+		model.addAttribute("code", globalBasicInfoId);
+		return "evaluationResult";
 	}
 }

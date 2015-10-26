@@ -42,12 +42,10 @@ public class BasicInfoServiceImpl implements IBasicInfoService {
 		basicInfo.setCreatedby("admin");
 		basicInfo.setCreateddate(new Date());
 		
-		StringBuffer sb = new StringBuffer();
-		if (basicInfoModel.getSelected_otherSubRequestIds().length > 0) {
-			for (String selectedReqId : basicInfoModel.getSelected_otherSubRequestIds()) {
-	    		sb.append(selectedReqId + ",");
-			}
-			basicInfo.setOthersubreq(sb.substring(0, sb.lastIndexOf(",")));
+		
+		if (basicInfoModel.getSelected_otherSubRequestIds()!=null) {
+			
+			basicInfo.setOthersubreq(basicInfoModel.getSelected_otherSubRequestIds());
 		}else {
 			basicInfo.setOthersubreq(basicInfoModel.getOtherSubRequestOther());
 		}

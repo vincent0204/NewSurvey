@@ -50,7 +50,8 @@
 	  )
 	</insert>
 	
-	<update id="update" parameterType="com.mewe.pojo.Answer">
+	
+	<update id="update" parameterType="com.mewe.pojo.Answer" >
 	  update mewe_answer 
 	  set 
 		answerDetailString = #{answerdetailstring}, 

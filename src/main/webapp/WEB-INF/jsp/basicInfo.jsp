@@ -54,6 +54,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if (selected_mainRequestId == "21") {
 			document.getElementById("mainSubRequest_div").style.display="none";
 			document.getElementById("mainSubRequestOther_div").style.display="block"; //21 = 其他
+			$.ajax({
+				type: "POST",  
+					url : "ajaxQueryOtherReq", 
+					dataType:'json',
+					success: function(data){
+						var html = "<option value=''>"+ "--请选择--" + "</option>";
+						$.each(data, function(i, item) {
+							console.log(data[i]);
+							html += "<option value='" + i + "'>" + item + "</options>";
+				        });
+						$(html).appendTo("#mainSubRequestOther");
+					}
+			});
 			return;
 		}
 		document.getElementById("mainSubRequest_div").style.display="block";
@@ -81,6 +94,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if (selected_otherRequestId == "21") {
 			document.getElementById("otherSubRequest_div").style.display="none";
 			document.getElementById("otherSubRequestOther_div").style.display="block"; //21 = 其他
+			$.ajax({
+				type: "POST",  
+					url : "ajaxQueryOtherReq", 
+					dataType:'json',
+					success: function(data){
+						var html = "<option value=''>"+ "--请选择--" + "</option>";
+						$.each(data, function(i, item) {
+							console.log(data[i]);
+							html += "<option value='" + i + "'>" + item + "</options>";
+				        });
+						$(html).appendTo("#otherSubRequestOther");
+					}
+			});
 			return;
 		}
 		document.getElementById("otherSubRequest_div").style.display="block";
@@ -91,9 +117,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				dataType:'json',
 				data: 'selected_mainOrOtherRequestId='+selected_otherRequestId,
 				success: function(data){
-					var html = "";
+					var html = "<option value=''>"+ "--请选择--" + "</option>";
 					$.each(data, function(i, item) {
-						 html += "<option value='" + i + "'>" + item + "</option>";
+						console.log(data[i]);
+						html += "<option value='" + i + "'>" + item + "</options>";
 			        });
 					$(html).appendTo("#selected_otherSubRequestIds");
 				}
@@ -211,8 +238,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<div style="display: none;" id="mainSubRequestOther_div" class="col-sm-4">
 				<div id="FieldLable" align="left"><b style="margin-right: 4%">主要诉求2(其他)</b>
-					<form:input cssStyle="height: 30px;"  id="mainSubRequestOther" path="mainSubRequestOther" 
-						cssClass="form-control"/>
+					<form:select Style="margin-right: 0%;"  id="mainSubRequestOther" path="mainSubRequestOther" 
+						cssClass="form-control">
+					</form:select>
 				</div>
 			</div>
 			
@@ -233,16 +261,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="otherSubRequest_div" style="display: none;" class="col-sm-4">
 				<div id="FieldLable" align="left"><b style="margin-right: 4%">其他诉求2</b>
 					<form:select style="margin-right: 0%;" id="selected_otherSubRequestIds" path="selected_otherSubRequestIds" 
-						cssClass="form-control">  
-		           		<option value=""/>--请选择--
-		       		</form:select> 
+						cssClass="form-control" />  
+		 
 	       		</div>
 			</div>
 		
 			<br/>
 			<div style="display: none;" id="otherSubRequestOther_div" class="col-sm-4">
 				<div id="FieldLable" align="left"><b style="margin-right: 4%">其他诉求2(其他)</b>
-					<form:input cssStyle="height: 30px;"  id="otherSubRequestOther" path="otherSubRequestOther" 
+					<form:select Style="margin-right: 0%;"  id="otherSubRequestOther" path="otherSubRequestOther" 
 						cssClass="form-control"/>
 				</div>
 			</div>

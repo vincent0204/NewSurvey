@@ -37,4 +37,17 @@ public class RequestServiceImpl implements IRequestService {
 		System.out.println("otherRequestMap==>" + otherRequestMap.size());
 		return otherRequestMap;
 	}
+
+
+	public Map<String, String> queryAllOtherRequestMap() {
+		
+		Map<String, String> allOtherRequestMap = new HashMap<String, String>();
+		
+		for (PicklistRequest plTemp : this.picklistRequestDao.selectAllOtherRequests()) {
+			allOtherRequestMap.put(plTemp.getId(), plTemp.getLabel());
+		}
+		
+		System.out.println("queryAllOtherRequestMap==>" + allOtherRequestMap.size());
+		return allOtherRequestMap;
+	}
 }
